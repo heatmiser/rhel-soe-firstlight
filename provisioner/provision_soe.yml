@@ -141,7 +141,7 @@
         - automation_hub|bool
 
 - name: include workshop_type unique setup roles
-  import_playbook: "{{ playbook_dir }}/workshop_specific/{{ workshop_type }}.yml"
+  import_playbook: "{{ playbook_dir }}/scenario_specific/{{ workshop_type }}.yml"
 
 - name: setup demos
   hosts: control_nodes
