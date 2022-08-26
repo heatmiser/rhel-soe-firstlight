@@ -12,6 +12,7 @@ authors:
   - Roland Wolters @liquidat
   - Craig Brandt <cbrandt@redhat.com>
   - Anshul Behl <abehl@redhat.com>
+  - Mike Savage <msavage@redhat.com>
 
 build_ignore:
   - assets
@@ -28,7 +29,7 @@ build_ignore:
 
 
 # A short summary description of the collection
-description: reusable content from Ansible Automation scenarios
+description: reusable content from Ansible Automation scenarios - based on Ansible Automation workshops codebase
 
 license:
   - GPL-2.0-or-later
@@ -70,13 +71,13 @@ dependencies:
   "redhat_cop.tower_utilities": "2.0.1"
 
 # The URL of the originating SCM repository
-repository: https://github.com/ansible/scenarios
+repository: https://github.com/heatmiser/rhel-soe-firstlight
 
 # The URL to any online docs
-documentation: https://github.com/ansible/scenarios/blob/devel/README.md
+documentation: https://github.com/ansible/workshops/blob/devel/README.md
 
 # The URL to the homepage of the collection/project
-homepage: https://ansible.github.io/scenarios/
+homepage: https://ansible.github.io/workshops/
 
 # The URL to the collection issue tracker
-issues: https://github.com/ansible/scenarios/issues
+issues: https://github.com/ansible/workshops/issues
