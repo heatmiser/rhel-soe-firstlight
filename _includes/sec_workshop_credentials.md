@@ -1,6 +1,6 @@
 <div id="section_title">
   <a data-toggle="collapse" href="#collapse2">
-    <h3>Workshop credentials</h3>
+    <h3>scenario credentials</h3>
   </a>
 </div>
 <div id="collapse2" class="panel-collapse collapse">

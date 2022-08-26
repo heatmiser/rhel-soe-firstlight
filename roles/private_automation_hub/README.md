@@ -11,7 +11,7 @@ Example:
   become: true
   tasks:
     - include_role:
-        name: ansible.workshops.private_automation_hub
+        name: ansible.scenarios.private_automation_hub
       when:
         - automation_hub is defined
         - automation_hub

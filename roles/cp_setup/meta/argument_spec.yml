@@ -4,6 +4,6 @@ argument_specs:
     short_description: Set up the checkpoint server.
     options:
       ec2_region:
-        description: The AWS EC2 region the workshop is deployed in.
+        description: The AWS EC2 region the scenario is deployed in.
         type: str
         required: true

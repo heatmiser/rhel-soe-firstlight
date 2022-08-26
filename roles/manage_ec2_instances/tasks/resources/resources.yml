@@ -1,5 +1,5 @@
 ---
-# Security workshop needs a second subnet inside the VPC
+# Security scenario needs a second subnet inside the VPC
 - name: Create AWS VPC {{ ec2_name_prefix }}-vpc
   amazon.aws.ec2_vpc_net:
     name: "{{ ec2_name_prefix }}-vpc"
@@ -12,9 +12,9 @@
       Info: "Username that provisioned this-> {{ aws_user }}"
       Linklight: "This was provisioned through the linklight provisioner"
       Students: "{{ student_total }}"
-      Workshop_type: "{{ workshop_type }}"
-      Workshop: "{{ ec2_name_prefix }}"
-      ansible-workshops: "true"
+      scenario_type: "{{ scenario_type }}"
+      scenario: "{{ ec2_name_prefix }}"
+      ansible-scenarios: "true"
   register: create_vpc
   until: create_vpc is not failed
   retries: 5
@@ -40,9 +40,9 @@
       Info: "Username that provisioned this-> {{ aws_user }}"
       Linklight: "This was provisioned through the linklight provisioner"
       Students: "{{ student_total }}"
-      Workshop_type: "{{ workshop_type }}"
-      Workshop: "{{ ec2_name_prefix }}"
-      ansible-workshops: "true"
+      scenario_type: "{{ scenario_type }}"
+      scenario: "{{ ec2_name_prefix }}"
+      ansible-scenarios: "true"
     rules: "{{ all_rules }}"
     rules_egress:
       - proto: all
@@ -64,9 +64,9 @@
       Info: "Username that provisioned this-> {{ aws_user }}"
       Linklight: "This was provisioned through the linklight provisioner"
       Students: "{{ student_total }}"
-      Workshop_type: "{{ workshop_type }}"
-      Workshop: "{{ ec2_name_prefix }}"
-      ansible-workshops: "true"
+      scenario_type: "{{ scenario_type }}"
+      scenario: "{{ ec2_name_prefix }}"
+      ansible-scenarios: "true"
   register: create_subnet
   until: create_subnet is not failed
   retries: 15
@@ -84,9 +84,9 @@
       Info: "Username that provisioned this-> {{ aws_user }}"
       Linklight: "This was provisioned through the linklight provisioner"
       Students: "{{ student_total }}"
-      Workshop_type: "{{ workshop_type }}"
-      Workshop: "{{ ec2_name_prefix }}"
-      ansible-workshops: "true"
+      scenario_type: "{{ scenario_type }}"
+      scenario: "{{ ec2_name_prefix }}"
+      ansible-scenarios: "true"
   register: create_subnet2
   until: create_subnet2 is not failed
   retries: 15
@@ -100,9 +100,9 @@
       Info: "Username that provisioned this-> {{ aws_user }}"
       Linklight: "This was provisioned through the linklight provisioner"
       Students: "Total {{ student_total }}"
-      Workshop_type: "{{ workshop_type }}"
-      Workshop: "{{ ec2_name_prefix }}"
-      ansible-workshops: "true"
+      scenario_type: "{{ scenario_type }}"
+      scenario: "{{ ec2_name_prefix }}"
+      ansible-scenarios: "true"
   register: igw
   until: igw is not failed
   retries: 15
@@ -121,9 +121,9 @@
       Info: "Username that provisioned this-> {{ aws_user }}"
       Linklight: "This was provisioned through the linklight provisioner"
       Students: "{{ student_total }}"
-      Workshop_type: "{{ workshop_type }}"
-      Workshop: "{{ ec2_name_prefix }}"
-      ansible-workshops: "true"
+      scenario_type: "{{ scenario_type }}"
+      scenario: "{{ ec2_name_prefix }}"
+      ansible-scenarios: "true"
   register: routetable
   until: routetable is not failed
   retries: 5
@@ -135,7 +135,7 @@
     ec2_vpc_subnet_id: "{{ create_subnet.subnet.id }}"
     ec2_vpc_subnet2_id: "{{ create_subnet2.subnet.id }}"
 
-- name: Create ssh key pair for workshop {{ ec2_name_prefix }}
+- name: Create ssh key pair for scenario {{ ec2_name_prefix }}
   amazon.aws.ec2_key:
     name: "{{ ec2_name_prefix }}-key"
     region: "{{ ec2_region }}"

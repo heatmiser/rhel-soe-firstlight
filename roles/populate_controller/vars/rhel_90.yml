@@ -11,11 +11,11 @@ controller_templates:
     description: "hardening for Linux servers"
     project: "Ansible official demo project"
     job_type: "run"
-    inventory: "Workshop Inventory"
+    inventory: "scenario Inventory"
     playbook: "playbooks/security/hardening.yml"
-    credential: "Workshop Credential"
+    credential: "scenario Credential"
     survey_enabled: true
-    execution_environment: "rhel_90 workshop execution environment"
+    execution_environment: "rhel_90 scenario execution environment"
     survey:
       name: Hardening survey
       description: Configure firewall, time, SSH and PCI baseline

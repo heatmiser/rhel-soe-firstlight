@@ -13,7 +13,7 @@
 - name: GitLab post | wait for gitlab to start
   become: false
   get_certificate:
-    host: "gitlab.{{ec2_name_prefix|lower}}.{{workshop_dns_zone}}"
+    host: "gitlab.{{ec2_name_prefix|lower}}.{{scenario_dns_zone}}"
     port: 443
   delegate_to: localhost
   register: check_cert2
@@ -28,7 +28,7 @@
 
 - name: GitLab Post | Check if root user password is set
   uri:
-    url: https://gitlab.{{ ec2_name_prefix }}.{{ workshop_dns_zone}}/oauth/token
+    url: https://gitlab.{{ ec2_name_prefix }}.{{ scenario_dns_zone}}/oauth/token
     method: POST
     validate_certs: false
     status_code: 200, 301
@@ -65,7 +65,7 @@
 
     - name: GitLab Post | Wait for root user to initizalize
       uri:
-        url: https://gitlab.{{ ec2_name_prefix }}.{{ workshop_dns_zone}}/oauth/token
+        url: https://gitlab.{{ ec2_name_prefix }}.{{ scenario_dns_zone}}/oauth/token
         method: POST
         validate_certs: false
         status_code: 200
@@ -88,7 +88,7 @@
 
 - name: GitLab Post | Obtain Access Token
   uri:
-    url: https://gitlab.{{ ec2_name_prefix }}.{{ workshop_dns_zone}}/oauth/token
+    url: https://gitlab.{{ ec2_name_prefix }}.{{ scenario_dns_zone}}/oauth/token
     method: POST
     validate_certs: false
     status_code: 200
@@ -105,7 +105,7 @@
 
 - name: GitLab Post | Create local users via API
   uri:
-    url: https://gitlab.{{ ec2_name_prefix }}.{{ workshop_dns_zone }}/api/v4/users
+    url: https://gitlab.{{ ec2_name_prefix }}.{{ scenario_dns_zone }}/api/v4/users
     method: POST
     validate_certs: false
     status_code:
@@ -121,7 +121,7 @@
         "username": "student{{ item }}",
         "password": "{{ admin_password }}",
         "name": "student{{ item }}",
-        "email": "student{{ item }}@{{ workshop_dns_zone }}",
+        "email": "student{{ item }}@{{ scenario_dns_zone }}",
         "skip_confirmation": true
       }
   register: create_user
@@ -129,7 +129,7 @@
 
 - name: GitLab Post | Get local user information via API
   uri:
-    url: https://gitlab.{{ ec2_name_prefix }}.{{ workshop_dns_zone}}/api/v4/users?username=student{{ item }}
+    url: https://gitlab.{{ ec2_name_prefix }}.{{ scenario_dns_zone}}/api/v4/users?username=student{{ item }}
     method: GET
     validate_certs: false
     status_code:

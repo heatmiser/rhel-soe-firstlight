@@ -3,8 +3,8 @@
   become: false
   community.aws.route53:
     state: "{{ s3_state }}"
-    zone: "{{ workshop_dns_zone }}"
-    record: "{{ student }}.{{ ec2_name_prefix|lower }}.{{ workshop_dns_zone }}"
+    zone: "{{ scenario_dns_zone }}"
+    record: "{{ student }}.{{ ec2_name_prefix|lower }}.{{ scenario_dns_zone }}"
     type: A
     overwrite: true
     value: "{{ ansible_host }}"

@@ -1,11 +1,11 @@
 # Populate automation controller role
 
-This role will populate automation controller.  The FQCN (fully qualified collection name) is `ansible.workshops.populate_controller`
+This role will populate automation controller.  The FQCN (fully qualified collection name) is `ansible.scenarios.populate_controller`
 
 - [Overview - Automation controller](https://www.ansible.com/products/controller)
 - [Documentation - Automation controller](https://docs.ansible.com/automation-controller/latest/html/quickstart/index.html)
 
-This role uses the [redhat_cop.controller_configuration](https://github.com/redhat-cop/tower_configuration) collection to populate Automation controller with specific projects, credentials and job templates for use with the Ansible Automation Workshops.  In tern the `redhat-cop.controller_configuration` uses the `ansible.controller` collection or `awx.awx` collection depending on if you are using downstream or upstream.
+This role uses the [redhat_cop.controller_configuration](https://github.com/redhat-cop/tower_configuration) collection to populate Automation controller with specific projects, credentials and job templates for use with the Ansible Automation scenarios.  In tern the `redhat-cop.controller_configuration` uses the `ansible.controller` collection or `awx.awx` collection depending on if you are using downstream or upstream.
 
 Example:
 
@@ -18,5 +18,5 @@ Example:
   tasks:
     - name: run populate_controller role
       include_role:
-        name: ansible.workshops.populate_controller
+        name: ansible.scenarios.populate_controller
 ```

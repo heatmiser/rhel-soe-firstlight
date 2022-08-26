@@ -4,7 +4,7 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_splunk": "{{ ec2_name_prefix }}-splunk"
+      "tag:scenario_splunk": "{{ ec2_name_prefix }}-splunk"
   register: splunk_instances
   when:
     - (security_console == 'splunk')
@@ -19,7 +19,7 @@
       Index: "{{ item[0] }}"
       Student: "student{{ item[0] + 1 }}"
       launch_time: "{{ item.1.launch_time }}"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
   with_indexed_items:
     - "{{ splunk_instances.instances }}"
   async: "{{ async_timeout_seconds }}"
@@ -33,7 +33,7 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_qradar": "{{ ec2_name_prefix }}-qradar"
+      "tag:scenario_qradar": "{{ ec2_name_prefix }}-qradar"
   register: qradar_instances
   when:
     - (security_console == 'qradar')
@@ -48,7 +48,7 @@
       Index: "{{ item[0] }}"
       Student: "student{{ item.0 + 1 }}"
       launch_time: "{{ item.1.launch_time }}"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
   with_indexed_items:
     - "{{ qradar_instances.instances }}"
   async: "{{ async_timeout_seconds }}"
@@ -69,7 +69,7 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_snort": "{{ ec2_name_prefix }}-snort"
+      "tag:scenario_snort": "{{ ec2_name_prefix }}-snort"
   register: snort_instances
 
 - name: Ensure tags are present for snort
@@ -82,7 +82,7 @@
       Index: "{{ item[0] }}"
       Student: "student{{ item[0] + 1 }}"
       launch_time: "{{ item.1.launch_time }}"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
   with_indexed_items:
     - "{{ snort_instances.instances }}"
   async: "{{ async_timeout_seconds }}"
@@ -95,7 +95,7 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_attacker": "{{ ec2_name_prefix }}-attacker"
+      "tag:scenario_attacker": "{{ ec2_name_prefix }}-attacker"
   register: attacker_instances
 
 - name: Ensure tags are present for attack simulation node
@@ -108,7 +108,7 @@
       Index: "{{ item[0] }}"
       Student: "student{{ item[0] + 1 }}"
       launch_time: "{{ item.1.launch_time }}"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
   with_indexed_items:
     - "{{ attacker_instances.instances }}"
   async: "{{ async_timeout_seconds }}"
@@ -122,7 +122,7 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_checkpoint_mgmt": "{{ ec2_name_prefix }}-checkpoint"
+      "tag:scenario_checkpoint_mgmt": "{{ ec2_name_prefix }}-checkpoint"
   register: checkpoint_mgmt_instances
 
 - name: Ensure tags are present for Check Point CloudGuard Security Management node (SECURITY MODE)
@@ -135,7 +135,7 @@
       Index: "{{ item[0] }}"
       Student: "student{{ item[0] + 1 }}"
       launch_time: "{{ item.1.launch_time }}"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
   with_indexed_items:
     - "{{ checkpoint_mgmt_instances.instances }}"
   async: "{{ async_timeout_seconds }}"
@@ -149,7 +149,7 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_windows": "{{ ec2_name_prefix }}-windows"
+      "tag:scenario_windows": "{{ ec2_name_prefix }}-windows"
   register: windows_ws_instances
 
 - name: Ensure tags are present for Windows Workstation (SECURITY MODE)
@@ -162,7 +162,7 @@
       Index: "{{ item[0] }}"
       Student: "student{{ item[0] + 1 }}"
       launch_time: "{{ item.1.launch_time }}"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
   with_indexed_items:
     - "{{ windows_ws_instances.instances }}"
   async: "{{ async_timeout_seconds }}"

@@ -1,6 +1,6 @@
 # Gitlab Client Role
 
-Configures the Ansible Automation Platform to be a gitlab client (used in the Windows Automation Workshop `workshop_type: windows`)
+Configures the Ansible Automation Platform to be a gitlab client (used in the Windows Automation scenario `scenario_type: windows`)
 
 Example:
 
@@ -13,5 +13,5 @@ Example:
     - git
   tasks:
     - include_role:
-        name: ansible.workshops.gitlab_client
+        name: ansible.scenarios.gitlab_client
 ```

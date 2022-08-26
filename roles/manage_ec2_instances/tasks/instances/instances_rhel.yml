@@ -12,13 +12,13 @@
     exact_count: "{{ student_total }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_node1": "{{ ec2_name_prefix }}-node1"
+      "tag:scenario_node1": "{{ ec2_name_prefix }}-node1"
     tags:
-      Workshop_node1: "{{ ec2_name_prefix }}-node1"
-      Workshop: "{{ ec2_name_prefix }}"
+      scenario_node1: "{{ ec2_name_prefix }}-node1"
+      scenario: "{{ ec2_name_prefix }}"
       uuid: "{{ ec2_name_prefix }}"
       guid: "{{ ec2_name_prefix }}"
-      Workshop_type: "{{ workshop_type }}"
+      scenario_type: "{{ scenario_type }}"
       AWS_USERNAME: "{{ aws_user }}"
       owner: "{{ aws_user }}"
       Info: "AWS_USERNAME that provisioned this-> {{ aws_user }}"
@@ -26,7 +26,7 @@
       Students: "{{ student_total }}"
       short_name: "node1"
       username: "{{ ec2_info[rhel].username }}"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
     volumes:
@@ -47,7 +47,7 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_node1": "{{ ec2_name_prefix }}-node1"
+      "tag:scenario_node1": "{{ ec2_name_prefix }}-node1"
   register: node1_output
 
 - name: Ensure tags are present for node1
@@ -94,13 +94,13 @@
     exact_count: "{{ student_total }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_node2": "{{ ec2_name_prefix }}-node2"
+      "tag:scenario_node2": "{{ ec2_name_prefix }}-node2"
     tags:
-      Workshop_node2: "{{ ec2_name_prefix }}-node2"
-      Workshop: "{{ ec2_name_prefix }}"
+      scenario_node2: "{{ ec2_name_prefix }}-node2"
+      scenario: "{{ ec2_name_prefix }}"
       uuid: "{{ ec2_name_prefix }}"
       guid: "{{ ec2_name_prefix }}"
-      Workshop_type: "{{ workshop_type }}"
+      scenario_type: "{{ scenario_type }}"
       AWS_USERNAME: "{{ aws_user }}"
       owner: "{{ aws_user }}"
       Info: "AWS_USERNAME that provisioned this-> {{ aws_user }}"
@@ -108,7 +108,7 @@
       Students: "{{ student_total }}"
       short_name: "node2"
       username: "{{ ec2_info[rhel].username }}"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
     volumes:
@@ -125,7 +125,7 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_node2": "{{ ec2_name_prefix }}-node2"
+      "tag:scenario_node2": "{{ ec2_name_prefix }}-node2"
   register: node2_output
 
 - name: Ensure tags are present for node2
@@ -172,13 +172,13 @@
     exact_count: "{{ student_total }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_node3": "{{ ec2_name_prefix }}-node3"
+      "tag:scenario_node3": "{{ ec2_name_prefix }}-node3"
     tags:
-      Workshop_node3: "{{ ec2_name_prefix }}-node3"
-      Workshop: "{{ ec2_name_prefix }}"
+      scenario_node3: "{{ ec2_name_prefix }}-node3"
+      scenario: "{{ ec2_name_prefix }}"
       uuid: "{{ ec2_name_prefix }}"
       guid: "{{ ec2_name_prefix }}"
-      Workshop_type: "{{ workshop_type }}"
+      scenario_type: "{{ scenario_type }}"
       AWS_USERNAME: "{{ aws_user }}"
       owner: "{{ aws_user }}"
       Info: "AWS_USERNAME that provisioned this-> {{ aws_user }}"
@@ -186,7 +186,7 @@
       Students: "{{ student_total }}"
       short_name: "node3"
       username: "{{ ec2_info[rhel].username }}"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
     volumes:
@@ -203,7 +203,7 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_node3": "{{ ec2_name_prefix }}-node3"
+      "tag:scenario_node3": "{{ ec2_name_prefix }}-node3"
   register: node3_output
 
 - name: Ensure tags are present for node3
@@ -252,11 +252,11 @@
     exact_count: "{{ student_total }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_isonode": "{{ ec2_name_prefix }}-isonode"
+      "tag:scenario_isonode": "{{ ec2_name_prefix }}-isonode"
     tags:
-      Workshop_isonode: "{{ ec2_name_prefix }}-isonode"
-      Workshop: "{{ ec2_name_prefix }}"
-      Workshop_type: "{{ workshop_type }}"
+      scenario_isonode: "{{ ec2_name_prefix }}-isonode"
+      scenario: "{{ ec2_name_prefix }}"
+      scenario_type: "{{ scenario_type }}"
       AWS_USERNAME: "{{ aws_user }}"
       owner: "{{ aws_user }}"
       Info: "AWS_USERNAME that provisioned this-> {{ aws_user }}"
@@ -264,7 +264,7 @@
       Students: "{{ student_total }}"
       short_name: "isonode"
       username: "{{ ec2_info[rhel].username }}"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
     volumes:
@@ -282,7 +282,7 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_isonode": "{{ ec2_name_prefix }}-isonode"
+      "tag:scenario_isonode": "{{ ec2_name_prefix }}-isonode"
   register: isonode_output
   when: create_cluster|bool
 
@@ -313,11 +313,11 @@
     exact_count: "{{ student_total }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_remotenode": "{{ ec2_name_prefix }}-remotenode"
+      "tag:scenario_remotenode": "{{ ec2_name_prefix }}-remotenode"
     tags:
-      Workshop_remotenode: "{{ ec2_name_prefix }}-remotenode"
-      Workshop: "{{ ec2_name_prefix }}"
-      Workshop_type: "{{ workshop_type }}"
+      scenario_remotenode: "{{ ec2_name_prefix }}-remotenode"
+      scenario: "{{ ec2_name_prefix }}"
+      scenario_type: "{{ scenario_type }}"
       AWS_USERNAME: "{{ aws_user }}"
       owner: "{{ aws_user }}"
       Info: "AWS_USERNAME that provisioned this-> {{ aws_user }}"
@@ -325,7 +325,7 @@
       Students: "{{ student_total }}"
       short_name: "remotenode"
       username: "{{ ec2_info[rhel].username }}"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
     volumes:
@@ -343,7 +343,7 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_remotenode": "{{ ec2_name_prefix }}-remotenode"
+      "tag:scenario_remotenode": "{{ ec2_name_prefix }}-remotenode"
   register: remotenode_output
   when: create_cluster|bool
 

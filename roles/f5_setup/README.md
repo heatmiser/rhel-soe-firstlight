@@ -1,6 +1,6 @@
 # F5 Setup Role
 
-This role is used for the F5 Automation Workshop (`workshop_type: f5`)
+This role is used for the F5 Automation scenario (`scenario_type: f5`)
 
 Example:
 
@@ -14,5 +14,5 @@ Example:
     as3_uri: "https://github.com/F5Networks/f5-appsvcs-extension/releases"
   tasks:
     - include_role:
-        name: ansible.workshops.f5_setup
+        name: ansible.scenarios.f5_setup
 ```

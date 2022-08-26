@@ -5,11 +5,11 @@
   become: false
   gather_facts: true
   tasks:
-    - name: workshop collection final check
+    - name: scenario collection final check
       block:
-        - name: run pre-check role to make sure workshop will complete provisioning
+        - name: run pre-check role to make sure scenario will complete provisioning
           include_role:
-            name: ../roles/workshop_check_setup
+            name: ../roles/scenario_check_setup
 
         - name: run AWS check setup if using AWS
           include_role:
@@ -23,7 +23,7 @@
       rescue:
         - name: Error with setup
           fail:
-            msg: The provisioner has failed during initial check_setup, please scroll up to see exact error.  Open an issue on https://github.com/ansible/workshops/issues
+            msg: The provisioner has failed during initial check_setup, please scroll up to see exact error.  Open an issue on https://github.com/ansible/scenarios/issues
 
 - name: Create lab instances in AWS
   hosts: localhost
@@ -65,7 +65,7 @@
   gather_facts: true
   tasks:
     - include_role:
-        name: ../roles/workshop_attendance
+        name: ../roles/scenario_attendance
       when: attendance|bool
 
 - name: wait for all security nodes to have SSH reachability
@@ -140,8 +140,8 @@
         - automation_hub is defined
         - automation_hub|bool
 
-- name: include workshop_type unique setup roles
-  import_playbook: "{{ playbook_dir }}/scenario_specific/{{ workshop_type }}.yml"
+- name: include scenario_type unique setup roles
+  import_playbook: "{{ playbook_dir }}/scenario_specific/{{ scenario_type }}.yml"
 
 - name: setup demos
   hosts: control_nodes
@@ -187,7 +187,7 @@
         summary_information: |
           PROVISIONER SUMMARY
           *******************
-          - Workshop name is {{ ec2_name_prefix }}
+          - Scenario name is {{ ec2_name_prefix }}
           - Instructor inventory is located at  {{ playbook_dir }}/{{ ec2_name_prefix }}/instructor_inventory.txt
           - Private key is located at {{ playbook_dir }}/{{ ec2_name_prefix }}/{{ ec2_name_prefix }}-private.pem
           {% if attendance %}

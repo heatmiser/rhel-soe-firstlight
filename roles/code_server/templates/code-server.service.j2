@@ -8,7 +8,7 @@ User={{ username }}
 WorkingDirectory=/home/{{ username }}
 Restart=on-failure
 RestartSec=10
-{% if workshop_type is defined %}
+{% if scenario_type is defined %}
 Environment="PASSWORD={{admin_password}}"
 
 ExecStart=/bin/code-server

@@ -17,14 +17,14 @@ pipeline {
                     DOTLESS_TOWER_VERSION = TOWER_VERSION.replace('.', '').trim()
                 }
                 echo """Tower Version under test: ${TOWER_VERSION}
-Workshop branch under test: ${env.BRANCH_NAME} | ${env.CHANGE_NAME}
+scenario branch under test: ${env.BRANCH_NAME} | ${env.CHANGE_NAME}
 Build Tag: ${env.BUILD_TAG}"""
             }
         }
 
         stage('Prep Environment') {
             steps {
-                withCredentials([file(credentialsId: 'workshops_tower_license', variable: 'TOWER_LICENSE')]) {
+                withCredentials([file(credentialsId: 'scenarios_tower_license', variable: 'TOWER_LICENSE')]) {
                     sh 'cp ${TOWER_LICENSE} provisioner/tower_license.json'
                 }
                 sh 'pip install netaddr pywinrm requests requests-credssp boto'
@@ -38,31 +38,31 @@ Build Tag: ${env.BUILD_TAG}"""
                     ).trim()
 
                     if (env.CHANGE_ID) {
-                        ANSIBLE_WORKSHOPS_REFSPEC = "+refs/pull/${env.CHANGE_ID}/head:refs/remotes/origin/${env.BRANCH_NAME}"
+                        ANSIBLE_scenarioS_REFSPEC = "+refs/pull/${env.CHANGE_ID}/head:refs/remotes/origin/${env.BRANCH_NAME}"
                     } else {
-                        ANSIBLE_WORKSHOPS_REFSPEC = "+refs/heads/${env.BRANCH_NAME}:refs/remotes/origin/${env.BRANCH_NAME}"
+                        ANSIBLE_scenarioS_REFSPEC = "+refs/heads/${env.BRANCH_NAME}:refs/remotes/origin/${env.BRANCH_NAME}"
                     }
                 }
 
                 sh """tee provisioner/tests/ci-common.yml << EOF
 tower_installer_url: https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-${TOWER_VERSION}-1.tar.gz
 admin_password: ${ADMIN_PASSWORD}
-ansible_workshops_refspec: ${ANSIBLE_WORKSHOPS_REFSPEC}
-ansible_workshops_version: ${env.BRANCH_NAME}
-ec2_name_prefix: tqe-{{ workshop_type }}-tower${DOTLESS_TOWER_VERSION}-${env.BRANCH_NAME}-${env.BUILD_ID}
+ansible_scenarios_refspec: ${ANSIBLE_scenarioS_REFSPEC}
+ansible_scenarios_version: ${env.BRANCH_NAME}
+ec2_name_prefix: tqe-{{ scenario_type }}-tower${DOTLESS_TOWER_VERSION}-${env.BRANCH_NAME}-${env.BUILD_ID}
 EOF
 """
             }
         }
 
-        stage('Workshop Type') {
+        stage('scenario Type') {
             parallel {
                 stage('RHEL') {
                     steps {
                         script {
                             stage('RHEL-deploy') {
-                                withCredentials([string(credentialsId: 'workshops_aws_access_key', variable: 'AWS_ACCESS_KEY'),
-                                                 string(credentialsId: 'workshops_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
+                                withCredentials([string(credentialsId: 'scenarios_aws_access_key', variable: 'AWS_ACCESS_KEY'),
+                                                 string(credentialsId: 'scenarios_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
                                     withEnv(["AWS_SECRET_KEY=${AWS_SECRET_KEY}",
                                              "AWS_ACCESS_KEY=${AWS_ACCESS_KEY}",
                                              "ANSIBLE_CONFIG=provisioner/ansible.cfg",
@@ -77,8 +77,8 @@ EOF
                         }
                         script {
                             stage('RHEL-verify') {
-                                withCredentials([string(credentialsId: 'workshops_aws_access_key', variable: 'AWS_ACCESS_KEY'),
-                                                 string(credentialsId: 'workshops_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
+                                withCredentials([string(credentialsId: 'scenarios_aws_access_key', variable: 'AWS_ACCESS_KEY'),
+                                                 string(credentialsId: 'scenarios_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
                                     withEnv(["AWS_SECRET_KEY=${AWS_SECRET_KEY}",
                                              "AWS_ACCESS_KEY=${AWS_ACCESS_KEY}",
                                              "ANSIBLE_CONFIG=provisioner/ansible.cfg",
@@ -86,15 +86,15 @@ EOF
                                         sh """ansible-playbook provisioner/tests/rhel_verify.yml \
                                                 -i provisioner/tqe-rhel-tower${DOTLESS_TOWER_VERSION}-${env.BRANCH_NAME}-${env.BUILD_ID}/instructor_inventory.txt \
                                                 --private-key=provisioner/tqe-rhel-tower${DOTLESS_TOWER_VERSION}-${env.BRANCH_NAME}-${env.BUILD_ID}/tqe-rhel-tower${DOTLESS_TOWER_VERSION}-${env.BRANCH_NAME}-${env.BUILD_ID}-private.pem \
-                                                -e tower_password=${ADMIN_PASSWORD} -e workshop_name=tqe-rhel-tower${DOTLESS_TOWER_VERSION}-${env.BRANCH_NAME}-${env.BUILD_ID}"""
+                                                -e tower_password=${ADMIN_PASSWORD} -e scenario_name=tqe-rhel-tower${DOTLESS_TOWER_VERSION}-${env.BRANCH_NAME}-${env.BUILD_ID}"""
                                     }
                                 }
                             }
                         }
                         script {
                             stage('RHEL-teardown') {
-                                withCredentials([string(credentialsId: 'workshops_aws_access_key', variable: 'AWS_ACCESS_KEY'),
-                                                 string(credentialsId: 'workshops_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
+                                withCredentials([string(credentialsId: 'scenarios_aws_access_key', variable: 'AWS_ACCESS_KEY'),
+                                                 string(credentialsId: 'scenarios_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
                                     withEnv(["AWS_SECRET_KEY=${AWS_SECRET_KEY}",
                                              "AWS_ACCESS_KEY=${AWS_ACCESS_KEY}",
                                              "ANSIBLE_CONFIG=provisioner/ansible.cfg",
@@ -114,8 +114,8 @@ EOF
                     steps {
                         script {
                             stage('networking-deploy') {
-                                withCredentials([string(credentialsId: 'workshops_aws_access_key', variable: 'AWS_ACCESS_KEY'),
-                                                 string(credentialsId: 'workshops_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
+                                withCredentials([string(credentialsId: 'scenarios_aws_access_key', variable: 'AWS_ACCESS_KEY'),
+                                                 string(credentialsId: 'scenarios_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
                                     withEnv(["AWS_SECRET_KEY=${AWS_SECRET_KEY}",
                                              "AWS_ACCESS_KEY=${AWS_ACCESS_KEY}",
                                              "ANSIBLE_CONFIG=provisioner/ansible.cfg",
@@ -130,8 +130,8 @@ EOF
                         }
                         script {
                             stage('networking-teardown') {
-                                withCredentials([string(credentialsId: 'workshops_aws_access_key', variable: 'AWS_ACCESS_KEY'),
-                                                 string(credentialsId: 'workshops_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
+                                withCredentials([string(credentialsId: 'scenarios_aws_access_key', variable: 'AWS_ACCESS_KEY'),
+                                                 string(credentialsId: 'scenarios_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
                                     withEnv(["AWS_SECRET_KEY=${AWS_SECRET_KEY}",
                                              "AWS_ACCESS_KEY=${AWS_ACCESS_KEY}",
                                              "ANSIBLE_CONFIG=provisioner/ansible.cfg",
@@ -151,8 +151,8 @@ EOF
                     steps {
                         script {
                             stage('F5-deploy') {
-                                withCredentials([string(credentialsId: 'workshops_aws_access_key', variable: 'AWS_ACCESS_KEY'),
-                                                 string(credentialsId: 'workshops_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
+                                withCredentials([string(credentialsId: 'scenarios_aws_access_key', variable: 'AWS_ACCESS_KEY'),
+                                                 string(credentialsId: 'scenarios_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
                                     withEnv(["AWS_SECRET_KEY=${AWS_SECRET_KEY}",
                                              "AWS_ACCESS_KEY=${AWS_ACCESS_KEY}",
                                              "ANSIBLE_CONFIG=provisioner/ansible.cfg",
@@ -170,13 +170,13 @@ EOF
                                 sh "cat provisioner/tqe-f5-tower${DOTLESS_TOWER_VERSION}-${env.BRANCH_NAME}-${env.BUILD_ID}/student1-instances.txt | grep -A 1 control | tail -n 1 | cut -d' ' -f 2 | cut -d'=' -f2 | tee control_host"
                                 CONTROL_NODE_HOST = readFile('control_host').trim()
                                 RUN_ALL_PLAYBOOKS = 'find . -name "*.yml" -o -name "*.yaml" | grep -v "2.0" | sort | xargs -I {} bash -c "echo {} && ANSIBLE_FORCE_COLOR=true ansible-playbook {}"'
-                                sh "sshpass -p '${ADMIN_PASSWORD}' ssh -o StrictHostKeyChecking=no student1@${CONTROL_NODE_HOST} 'cd f5-workshop && ${RUN_ALL_PLAYBOOKS}'"
+                                sh "sshpass -p '${ADMIN_PASSWORD}' ssh -o StrictHostKeyChecking=no student1@${CONTROL_NODE_HOST} 'cd f5-scenario && ${RUN_ALL_PLAYBOOKS}'"
                             }
                         }
                         script {
                             stage('F5-teardown') {
-                                withCredentials([string(credentialsId: 'workshops_aws_access_key', variable: 'AWS_ACCESS_KEY'),
-                                                 string(credentialsId: 'workshops_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
+                                withCredentials([string(credentialsId: 'scenarios_aws_access_key', variable: 'AWS_ACCESS_KEY'),
+                                                 string(credentialsId: 'scenarios_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
                                     withEnv(["AWS_SECRET_KEY=${AWS_SECRET_KEY}",
                                              "AWS_ACCESS_KEY=${AWS_ACCESS_KEY}",
                                              "ANSIBLE_CONFIG=provisioner/ansible.cfg",
@@ -195,8 +195,8 @@ EOF
                     steps {
                         script {
                             stage('security-deploy') {
-                                withCredentials([string(credentialsId: 'workshops_aws_access_key', variable: 'AWS_ACCESS_KEY'),
-                                                 string(credentialsId: 'workshops_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
+                                withCredentials([string(credentialsId: 'scenarios_aws_access_key', variable: 'AWS_ACCESS_KEY'),
+                                                 string(credentialsId: 'scenarios_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
                                     withEnv(["AWS_SECRET_KEY=${AWS_SECRET_KEY}",
                                              "AWS_ACCESS_KEY=${AWS_ACCESS_KEY}",
                                              "ANSIBLE_CONFIG=provisioner/ansible.cfg",
@@ -211,8 +211,8 @@ EOF
                         }
                         script {
                             stage('security-verify') {
-                                withCredentials([string(credentialsId: 'workshops_aws_access_key', variable: 'AWS_ACCESS_KEY'),
-                                                 string(credentialsId: 'workshops_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
+                                withCredentials([string(credentialsId: 'scenarios_aws_access_key', variable: 'AWS_ACCESS_KEY'),
+                                                 string(credentialsId: 'scenarios_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
                                     withEnv(["AWS_SECRET_KEY=${AWS_SECRET_KEY}",
                                              "AWS_ACCESS_KEY=${AWS_ACCESS_KEY}",
                                              "ANSIBLE_CONFIG=provisioner/ansible.cfg",
@@ -226,8 +226,8 @@ EOF
                         }
                         script {
                             stage('security-exercises') {
-                                withCredentials([string(credentialsId: 'workshops_aws_access_key', variable: 'AWS_ACCESS_KEY'),
-                                                 string(credentialsId: 'workshops_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
+                                withCredentials([string(credentialsId: 'scenarios_aws_access_key', variable: 'AWS_ACCESS_KEY'),
+                                                 string(credentialsId: 'scenarios_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
                                     withEnv(["AWS_SECRET_KEY=${AWS_SECRET_KEY}",
                                              "AWS_ACCESS_KEY=${AWS_ACCESS_KEY}",
                                              "ANSIBLE_CONFIG=provisioner/ansible.cfg",
@@ -240,8 +240,8 @@ EOF
                         }
                         script {
                             stage('security-teardown') {
-                                withCredentials([string(credentialsId: 'workshops_aws_access_key', variable: 'AWS_ACCESS_KEY'),
-                                                 string(credentialsId: 'workshops_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
+                                withCredentials([string(credentialsId: 'scenarios_aws_access_key', variable: 'AWS_ACCESS_KEY'),
+                                                 string(credentialsId: 'scenarios_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
                                     withEnv(["AWS_SECRET_KEY=${AWS_SECRET_KEY}",
                                              "AWS_ACCESS_KEY=${AWS_ACCESS_KEY}",
                                              "ANSIBLE_CONFIG=provisioner/ansible.cfg",
@@ -260,8 +260,8 @@ EOF
                     steps {
                         script {
                             stage('windows-deploy') {
-                                withCredentials([string(credentialsId: 'workshops_aws_access_key', variable: 'AWS_ACCESS_KEY'),
-                                                 string(credentialsId: 'workshops_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
+                                withCredentials([string(credentialsId: 'scenarios_aws_access_key', variable: 'AWS_ACCESS_KEY'),
+                                                 string(credentialsId: 'scenarios_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
                                     withEnv(["AWS_SECRET_KEY=${AWS_SECRET_KEY}",
                                              "AWS_ACCESS_KEY=${AWS_ACCESS_KEY}",
                                              "ANSIBLE_CONFIG=provisioner/ansible.cfg",
@@ -276,8 +276,8 @@ EOF
                         }
                         script {
                             stage('windows-teardown') {
-                                withCredentials([string(credentialsId: 'workshops_aws_access_key', variable: 'AWS_ACCESS_KEY'),
-                                                 string(credentialsId: 'workshops_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
+                                withCredentials([string(credentialsId: 'scenarios_aws_access_key', variable: 'AWS_ACCESS_KEY'),
+                                                 string(credentialsId: 'scenarios_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
                                     withEnv(["AWS_SECRET_KEY=${AWS_SECRET_KEY}",
                                              "AWS_ACCESS_KEY=${AWS_ACCESS_KEY}",
                                              "ANSIBLE_CONFIG=provisioner/ansible.cfg",
@@ -301,8 +301,8 @@ EOF
         cleanup {
             script {
                 stage('Cleaning up') {
-                    withCredentials([string(credentialsId: 'workshops_aws_access_key', variable: 'AWS_ACCESS_KEY'),
-                                     string(credentialsId: 'workshops_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
+                    withCredentials([string(credentialsId: 'scenarios_aws_access_key', variable: 'AWS_ACCESS_KEY'),
+                                     string(credentialsId: 'scenarios_aws_secret_key', variable: 'AWS_SECRET_KEY')]) {
                         withEnv(["AWS_SECRET_KEY=${AWS_SECRET_KEY}",
                                  "AWS_ACCESS_KEY=${AWS_ACCESS_KEY}",
                                  "ANSIBLE_CONFIG=provisioner/ansible.cfg",

@@ -4,7 +4,7 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_attendance": "{{ec2_name_prefix}}-attendance"
+      "tag:scenario_attendance": "{{ec2_name_prefix}}-attendance"
   register: attendance_host_facts
 
 - name: Add attendance instance to host group

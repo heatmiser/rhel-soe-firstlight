@@ -12,24 +12,24 @@
       assign_public_ip: true
     filters:
       instance-state-name: running
-      "tag:Workshop_gitlab": "{{ ec2_name_prefix }}-gitlab"
+      "tag:scenario_gitlab": "{{ ec2_name_prefix }}-gitlab"
     tags:
-      Workshop_gitlab: "{{ ec2_name_prefix }}-gitlab"
+      scenario_gitlab: "{{ ec2_name_prefix }}-gitlab"
       Name: "{{ ec2_name_prefix }}-gitlab"
-      App: AnsibleWorkshop
-      Workshop: "{{ ec2_name_prefix }}"
+      App: Ansiblescenario
+      scenario: "{{ ec2_name_prefix }}"
       uuid: "{{ ec2_name_prefix }}"
       guid: "{{ ec2_name_prefix }}"
-      Workshop_type: "{{ workshop_type }}"
+      scenario_type: "{{ scenario_type }}"
       AWS_USERNAME: "{{ aws_user }}"
       owner: "{{ aws_user }}"
       Info: "Username that provisioned this-> {{ aws_user }}"
       Linklight: "This was provisioned through the linklight provisioner"
       Students: "{{ student_total }}"
       short_name: 'gitlab'
-      long_name: "gitlab.{{ ec2_name_prefix }}.{{ workshop_dns_zone | default('') }}"
+      long_name: "gitlab.{{ ec2_name_prefix }}.{{ scenario_dns_zone | default('') }}"
       username: "{{ ec2_info['skylight_rhel8_gitlab']['username'] }}"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
     volumes:
@@ -59,21 +59,21 @@
       assign_public_ip: true
     filters:
       instance-state-name: running
-      "tag:Workshop_instance1": "{{ ec2_name_prefix }}-instance1"
+      "tag:scenario_instance1": "{{ ec2_name_prefix }}-instance1"
     tags:
-      Workshop_instance1: "{{ ec2_name_prefix }}-instance1"
-      App: AnsibleWorkshop
-      Workshop: "{{ ec2_name_prefix }}"
+      scenario_instance1: "{{ ec2_name_prefix }}-instance1"
+      App: Ansiblescenario
+      scenario: "{{ ec2_name_prefix }}"
       uuid: "{{ ec2_name_prefix }}"
       guid: "{{ ec2_name_prefix }}"
-      Workshop_type: "{{ workshop_type }}"
+      scenario_type: "{{ scenario_type }}"
       AWS_USERNAME: "{{ aws_user }}"
       owner: "{{ aws_user }}"
       Info: "AWS_USERNAME that provisioned this-> {{ aws_user }}"
       Linklight: "This was provisioned through the linklight provisioner"
       Students: "{{ student_total }}"
       short_name: "instance1"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
     volumes:
@@ -100,21 +100,21 @@
       assign_public_ip: true
     filters:
       instance-state-name: running
-      "tag:Workshop_instance2": "{{ ec2_name_prefix }}-instance2"
+      "tag:scenario_instance2": "{{ ec2_name_prefix }}-instance2"
     tags:
-      Workshop_instance2: "{{ ec2_name_prefix }}-instance2"
-      App: AnsibleWorkshop
-      Workshop: "{{ ec2_name_prefix }}"
+      scenario_instance2: "{{ ec2_name_prefix }}-instance2"
+      App: Ansiblescenario
+      scenario: "{{ ec2_name_prefix }}"
       uuid: "{{ ec2_name_prefix }}"
       guid: "{{ ec2_name_prefix }}"
-      Workshop_type: "{{ workshop_type }}"
+      scenario_type: "{{ scenario_type }}"
       AWS_USERNAME: "{{ aws_user }}"
       owner: "{{ aws_user }}"
       Info: "AWS_USERNAME that provisioned this-> {{ aws_user }}"
       Linklight: "This was provisioned through the linklight provisioner"
       Students: "{{ student_total }}"
       short_name: "instance2"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
     volumes:
@@ -135,7 +135,7 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_instance1": "{{ ec2_name_prefix }}-instance1"
+      "tag:scenario_instance1": "{{ ec2_name_prefix }}-instance1"
   register: instance1_info
 
 - name: WINDOWS | Ensure tags are present for instance 1
@@ -157,7 +157,7 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_instance2": "{{ ec2_name_prefix }}-instance2"
+      "tag:scenario_instance2": "{{ ec2_name_prefix }}-instance2"
   register: instance2_info
 
 - name: WINDOWS | Ensure tags are present for instance 2

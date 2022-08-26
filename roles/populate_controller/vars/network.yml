@@ -2,7 +2,7 @@
 controller_hosts:
   - name: "backup-server"
     description: "this server is where we backup network configuration"
-    inventory: "Workshop Inventory"
+    inventory: "scenario Inventory"
     variables:
       note: in production these passwords would be encrypted in vault
       ansible_user: "ec2-user"
@@ -70,7 +70,7 @@ controller_user_accounts:
     first_name: Gene
     last_name: Belcher
 controller_projects:
-  - name: "Workshop Project"
+  - name: "scenario Project"
     organization: "Red Hat network organization"
     scm_type: git
     scm_url: "https://github.com/network-automation/toolkit"
@@ -88,10 +88,10 @@ controller_roles:
     target_team: "Netops"
     role: member
   - role: use
-    inventory: "Workshop Inventory"
+    inventory: "scenario Inventory"
     team: Netops
   - role: use
-    inventory: "Workshop Inventory"
+    inventory: "scenario Inventory"
     team: Netadmin
   - user: network-operator
     role: execute
@@ -100,49 +100,49 @@ controller_templates:
   - name: "Network-Commands"
     description: "adhoc cisco commands"
     job_type: "run"
-    inventory: "Workshop Inventory"
-    project: "Workshop Project"
+    inventory: "scenario Inventory"
+    project: "scenario Project"
     playbook: "playbooks/network_commands.yml"
-    credentials: "Workshop Credential"
+    credentials: "scenario Credential"
     limit: "cisco"
     survey_enabled: true
     survey: "{{ lookup('template', 'survey_spec.json') }}"
   - name: "Network-Reload"
     job_type: "run"
-    inventory: "Workshop Inventory"
-    project: "Workshop Project"
+    inventory: "scenario Inventory"
+    project: "scenario Project"
     playbook: "playbooks/network_reload.yml"
-    credentials: "Workshop Credential"
+    credentials: "scenario Credential"
   - name: "Network-User"
     job_type: "run"
-    inventory: "Workshop Inventory"
-    project: "Workshop Project"
+    inventory: "scenario Inventory"
+    project: "scenario Project"
     playbook: "playbooks/network_user.yml"
-    credentials: "Workshop Credential"
+    credentials: "scenario Credential"
     state: "present"
     survey_enabled: true
     survey: "{{ lookup('template', 'user.json') }}"
   - name: "Network-Time"
     job_type: "run"
-    inventory: "Workshop Inventory"
-    project: "Workshop Project"
+    inventory: "scenario Inventory"
+    project: "scenario Project"
     playbook: "playbooks/network_time.yml"
-    credentials: "Workshop Credential"
+    credentials: "scenario Credential"
     limit: "cisco"
     survey_enabled: true
     survey: "{{ lookup('template', 'network_time.json') }}"
   - name: "Network-Report"
     job_type: "run"
-    inventory: "Workshop Inventory"
-    project: "Workshop Project"
+    inventory: "scenario Inventory"
+    project: "scenario Project"
     playbook: "playbooks/network_report.yml"
-    credentials: "Workshop Credential"
+    credentials: "scenario Credential"
   - name: "Network-System"
     job_type: "run"
-    inventory: "Workshop Inventory"
-    project: "Workshop Project"
+    inventory: "scenario Inventory"
+    project: "scenario Project"
     playbook: "playbooks/network_system.yml"
-    credentials: "Workshop Credential"
+    credentials: "scenario Credential"
     limit: "cisco"
     survey_enabled: true
     survey: "{{ lookup('template', 'system.json') }}"

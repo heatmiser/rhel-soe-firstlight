@@ -1,6 +1,6 @@
 ---
-- name: common workshop setup for control node
-  include_tasks: 20_workshop_setup.yml
+- name: common scenario setup for control node
+  include_tasks: 20_scenario_setup.yml
 
 - name: make sure password is set on Automation controller
   include_tasks: "35_controller_pre_build.yml"

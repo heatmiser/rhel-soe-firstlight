@@ -12,8 +12,8 @@ controller_templates:
     project: "Ansible official demo project"
     job_type: run
     playbook: "playbooks/infrastructure/deploy_application.yml"
-    credentials: "Workshop Credential"
-    inventory: "Workshop Inventory"
+    credentials: "scenario Credential"
+    inventory: "scenario Inventory"
     survey_enabled: true
     survey:
       name: Deploy application survey

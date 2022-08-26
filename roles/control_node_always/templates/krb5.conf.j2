@@ -12,14 +12,14 @@ includedir /etc/krb5.conf.d/
  renew_lifetime = 7d
  forwardable = true
  rdns = false
- default_realm = {{ workshop_dns_zone | upper }}
+ default_realm = {{ scenario_dns_zone | upper }}
  default_ccache_name = KEYRING:persistent:%{uid}
 
 [realms]
-{{ workshop_dns_zone | upper }} = {
- kdc = windc.{{ workshop_dns_zone }}:88
+{{ scenario_dns_zone | upper }} = {
+ kdc = windc.{{ scenario_dns_zone }}:88
 }
 
 [domain_realm]
-{{ workshop_dns_zone }} = {{ workshop_dns_zone | upper }}
+{{ scenario_dns_zone }} = {{ scenario_dns_zone | upper }}
 

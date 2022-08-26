@@ -19,25 +19,25 @@
     group: "{{ username }}"
     mode: 0400
 
-- name: clean out /tmp/workshops
+- name: clean out /tmp/scenarios
   file:
-    path: /tmp/workshops
+    path: /tmp/scenarios
     state: absent
 
-- name: Clone workshops repo
+- name: Clone scenarios repo
   git:
     accept_hostkey: true
     clone: true
-    dest: /tmp/workshops
-    repo: '{{ ansible_workshops_url | default("https://github.com/ansible/workshops.git") }}'
-    version: '{{ ansible_workshops_version | default("main") }}'
-    refspec: '{{ ansible_workshops_refspec | default("") }}'
+    dest: /tmp/scenarios
+    repo: '{{ ansible_scenarios_url | default("https://github.com/heatmiser/rhel-soe-firstlight.git") }}'
+    version: '{{ ansible_scenarios_version | default("main") }}'
+    refspec: '{{ ansible_scenarios_refspec | default("") }}'
     force: true
 
 - name: Move relevant exercises to correct location
   copy:
-    src: '{{ "/tmp/workshops/" + exercise_src_location | default("exercises/ansible_" + workshop_type) + "/" }}'
-    dest: '{{ "/home/" + username + "/" + exercise_dest_location | default(workshop_type + "-workshop") }}'
+    src: '{{ "/tmp/scenarios/" + exercise_src_location | default("exercises/ansible_" + scenario_type) + "/" }}'
+    dest: '{{ "/home/" + username + "/" + exercise_dest_location | default(scenario_type + "-scenario") }}'
     remote_src: true
     owner: "{{ username }}"
     group: "{{ username }}"
@@ -70,11 +70,11 @@
     src: ansible.cfg.j2
     dest: "/etc/ansible/ansible.cfg"
 
-# Pull specific EE for each workshop based on workshop name
-- name: Pull execution environment for {{ workshop_type }} workshop
+# Pull specific EE for each scenario based on scenario name
+- name: Pull execution environment for {{ scenario_type }} scenario
   become_user: "{{ username }}"
   containers.podman.podman_image:
-    name: "{{ lookup('vars', workshop_type + '_ee') }}"
+    name: "{{ lookup('vars', scenario_type + '_ee') }}"
   register: podman_pull
   until: podman_pull is not failed
   retries: 5

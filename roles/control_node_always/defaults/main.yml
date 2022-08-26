@@ -1,7 +1,7 @@
 ---
 aap_dir: "/home/{{ username }}/aap_install"
 output_dir: "{{ playbook_dir }}/{{ ec2_name_prefix }}"
-# workshop execution environments
+# scenario execution environments
 f5_ee: "quay.io/acme_corp/f5_ee:latest"
 security_ee: "quay.io/acme_corp/security_ee:latest"
 rhel_ee: "registry.redhat.io/ansible-automation-platform-20-early-access/ee-supported-rhel8:2.0.0"

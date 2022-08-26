@@ -2,11 +2,11 @@
 # region where the nodes will live
 ec2_region: us-east-1
 # name prefix for all the VMs
-ec2_name_prefix: TESTWORKSHOP
+ec2_name_prefix: TESTscenario
 # amount of work benches to provision
 student_total: 1
-# workshop is put into isecurity mode
-workshop_type: 'demo'
+# scenario is put into isecurity mode
+scenario_type: 'demo'
 security_console: 'qradar'
 # Required for AAP download https://access.redhat.com/articles/3626371
 offline_token: "234234234234234234234234234234234234234"
@@ -14,7 +14,7 @@ offline_token: "234234234234234234234234234234234234234"
 redhat_username: joe@redhat.com
 redhat_password: R3dh4t!
 # DNS domain
-workshop_dns_zone: demoredhat.com
+scenario_dns_zone: demoredhat.com
 ## Optional Variables
 admin_password: ansible
 windows_password: Ansible+Red*Hat19!20

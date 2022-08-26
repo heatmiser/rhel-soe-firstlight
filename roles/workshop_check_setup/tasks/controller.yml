@@ -1,5 +1,5 @@
 ---
-- name: ensure workshop folder {{ ec2_name_prefix }} exists
+- name: ensure scenario folder {{ ec2_name_prefix }} exists
   file:
     path: "{{ output_dir }}"
     state: directory

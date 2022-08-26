@@ -14,5 +14,5 @@
         pre_build: false
     - name: fail if we can't overwrite pre_build var
       fail:
-        msg: "Cannot overwrite pre_build var, did you send as an extra_var?  Try setting pre_build to false or opening an issue on github.com/ansible/workshops"
+        msg: "Cannot overwrite pre_build var, did you send as an extra_var?  Try setting pre_build to false or opening an issue on github.com/ansible/scenarios"
       when: pre_build

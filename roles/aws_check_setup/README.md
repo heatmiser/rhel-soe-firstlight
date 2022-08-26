@@ -7,5 +7,5 @@ Example:
 ```
 - name: run AWS check setup if using AWS
   include_role:
-    name: ansible.workshops.aws_check_setup
+    name: ansible.scenarios.aws_check_setup
 ```

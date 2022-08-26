@@ -16,7 +16,7 @@
             aws_user: "{{ aws_user }}"
             ec2_region: "{{ ec2_region }}"
             student_total: "{{ student_total }}"
-            workshop_type: "{{ workshop_type }}"
+            scenario_type: "{{ scenario_type }}"
         body_format: json
   rescue:
     - debug:
@@ -25,7 +25,7 @@
     - name: append information to summary
       set_fact:
         callback_information: |
-          - Ansible Tower callback failure, this workshop will not be recorded
+          - Ansible Tower callback failure, this scenario will not be recorded
       run_once: true
       delegate_to: localhost
       delegate_facts: true

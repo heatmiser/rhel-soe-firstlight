@@ -1,3 +1,3 @@
-# Workshop Attendance Role
+# scenario Attendance Role
 
-This role sets up the attendance node to divide out workshops to students (assign them a workbench)
+This role sets up the attendance node to divide out scenarios to students (assign them a workbench)

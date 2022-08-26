@@ -3,8 +3,8 @@
   hostname:
     name: "{{short_name}}"
 
-- name: setup workshop specific webserver information
+- name: setup scenario specific webserver information
   include_tasks: "{{item}}"
   with_first_found:
-    - "{{role_path}}/tasks/{{workshop_type}}.yml"
-    - "{{role_path}}/tasks/unsupported_workshop.yml"
+    - "{{role_path}}/tasks/{{scenario_type}}.yml"
+    - "{{role_path}}/tasks/unsupported_scenario.yml"

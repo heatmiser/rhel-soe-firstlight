@@ -1,5 +1,5 @@
 ---
-- name: configure rhel workshop for webservers
+- name: configure rhel scenario for webservers
   hosts: lab_hosts
   become: true
   gather_facts: false
@@ -24,8 +24,8 @@
       become: false
       community.aws.route53:
         state: present
-        zone: "{{ workshop_dns_zone }}"
-        record: "{{ student }}-sat.{{ ec2_name_prefix|lower }}.{{ workshop_dns_zone }}"
+        zone: "{{ scenario_dns_zone }}"
+        record: "{{ student }}-sat.{{ ec2_name_prefix|lower }}.{{ scenario_dns_zone }}"
         type: A
         overwrite: true
         value: "{{ ansible_host }}"
@@ -115,7 +115,7 @@
         scm_type: git
         scm_url: 'https://github.com/redhat-partner-tech/automated-smart-management.git'
         scm_branch: aap2-29compat
-        default_environment: smart_mgmt workshop execution environment
+        default_environment: smart_mgmt scenario execution environment
       - name: Fact Scan
         organization: Default
         scm_type: git
@@ -124,17 +124,17 @@
       - name: SETUP / Satellite
         project: Automated Management
         playbook: setup_satellite.yml
-        inventory: Workshop Inventory
+        inventory: scenario Inventory
         credentials:
           - Satellite Credential
-          - Workshop Credential
+          - scenario Credential
         extra_vars:
           refresh_satellite_manifest: false
         ask_variables_on_launch: true
       - name: SETUP / Controller
         project: Automated Management
         playbook: setup_controller.yml
-        inventory: Workshop Inventory
+        inventory: scenario Inventory
         credentials:
           - Controller Credential
 
@@ -148,14 +148,14 @@
       when:
         - controller_infra_workloads | d("") | length >0
 
-- name: Final workshop preparations
+- name: Final scenario preparations
   hosts: control_nodes
   become: true
   gather_facts: true
 
   tasks:
 
-    - when: provision_mode == "workshop"
+    - when: provision_mode == "scenario"
       block:
         - name: Run SETUP / Satellite job template
           awx.awx.job_launch:
@@ -164,12 +164,12 @@
               refresh_satellite_manifest: true
             controller_username: admin
             controller_password: "{{ admin_password }}"
-            controller_host: "https://{{ student }}.{{ ec2_name_prefix }}.{{ workshop_dns_zone }}"
+            controller_host: "https://{{ student }}.{{ ec2_name_prefix }}.{{ scenario_dns_zone }}"
           register: setupsatjob
 
         - name: "Check API until SETUP / Satellite job is successful"
           ansible.builtin.uri:
-            url: "https://{{ student }}.{{ ec2_name_prefix }}.{{ workshop_dns_zone }}/api/v2/jobs/{{ setupsatjob.id }}/?format=json"
+            url: "https://{{ student }}.{{ ec2_name_prefix }}.{{ scenario_dns_zone }}/api/v2/jobs/{{ setupsatjob.id }}/?format=json"
             user: admin
             password: "{{ admin_password }}"
             force_basic_auth: true
@@ -177,8 +177,8 @@
             return_content: true
             status_code: 200
             validate_certs: false
-          register: workshop_job_templates01
-          until: workshop_job_templates01.json.status == "successful"
+          register: scenario_job_templates01
+          until: scenario_job_templates01.json.status == "successful"
           delay: 20  # Every 20 seconds
           retries: 180  # 1hour 60*60/20
 
@@ -191,12 +191,12 @@
               refresh_satellite_manifest: true
             controller_username: admin
             controller_password: "{{ admin_password }}"
-            controller_host: "https://{{ student }}.{{ ec2_name_prefix }}.{{ workshop_dns_zone }}"
+            controller_host: "https://{{ student }}.{{ ec2_name_prefix }}.{{ scenario_dns_zone }}"
           register: setupsatjob
 
         - name: "Check API until SETUP / Satellite job is successful"
           ansible.builtin.uri:
-            url: "https://{{ student }}.{{ ec2_name_prefix }}.{{ workshop_dns_zone }}/api/v2/jobs/{{ setupsatjob.id }}/?format=json"
+            url: "https://{{ student }}.{{ ec2_name_prefix }}.{{ scenario_dns_zone }}/api/v2/jobs/{{ setupsatjob.id }}/?format=json"
             user: admin
             password: "{{ admin_password }}"
             force_basic_auth: true
@@ -204,8 +204,8 @@
             return_content: true
             status_code: 200
             validate_certs: false
-          register: workshop_job_templates01
-          until: workshop_job_templates01.json.status == "successful"
+          register: scenario_job_templates01
+          until: scenario_job_templates01.json.status == "successful"
           delay: 20  # Every 20 seconds
           retries: 180  # 1hour 60*60/20
 
@@ -214,12 +214,12 @@
             job_template: "SETUP / Controller"
             controller_username: admin
             controller_password: "{{ admin_password }}"
-            controller_host: "https://{{ student }}.{{ ec2_name_prefix }}.{{ workshop_dns_zone }}"
+            controller_host: "https://{{ student }}.{{ ec2_name_prefix }}.{{ scenario_dns_zone }}"
           register: setupcontroljob
 
         - name: "Check API until SETUP / Controller job is successful"
           ansible.builtin.uri:
-            url: "https://{{ student }}.{{ ec2_name_prefix }}.{{ workshop_dns_zone }}/api/v2/jobs/{{ setupcontroljob.id }}/?format=json"
+            url: "https://{{ student }}.{{ ec2_name_prefix }}.{{ scenario_dns_zone }}/api/v2/jobs/{{ setupcontroljob.id }}/?format=json"
             user: admin
             password: "{{ admin_password }}"
             force_basic_auth: true
@@ -227,8 +227,8 @@
             return_content: true
             status_code: 200
             validate_certs: false
-          register: workshop_job_templates02
-          until: workshop_job_templates02.json.status == "successful"
+          register: scenario_job_templates02
+          until: scenario_job_templates02.json.status == "successful"
           delay: 20  # Every 20 seconds
           retries: 180  # 1hour 60*60/20
 
@@ -240,12 +240,12 @@
               content_view: RHEL7
             controller_username: admin
             controller_password: "{{ admin_password }}"
-            controller_host: "https://{{ student }}.{{ ec2_name_prefix }}.{{ workshop_dns_zone }}"
+            controller_host: "https://{{ student }}.{{ ec2_name_prefix }}.{{ scenario_dns_zone }}"
           register: rhelpubcvjob01
 
         - name: "Check API until SATELLITE / RHEL - Publish Content View job is successful"
           ansible.builtin.uri:
-            url: "https://{{ student }}.{{ ec2_name_prefix }}.{{ workshop_dns_zone }}/api/v2/jobs/{{ rhelpubcvjob01.id }}/?format=json"
+            url: "https://{{ student }}.{{ ec2_name_prefix }}.{{ scenario_dns_zone }}/api/v2/jobs/{{ rhelpubcvjob01.id }}/?format=json"
             user: admin
             password: "{{ admin_password }}"
             force_basic_auth: true
@@ -253,8 +253,8 @@
             return_content: true
             status_code: 200
             validate_certs: false
-          register: workshop_job_templates03
-          until: workshop_job_templates03.json.status == "successful"
+          register: scenario_job_templates03
+          until: scenario_job_templates03.json.status == "successful"
           delay: 20  # Every 20 seconds
           retries: 180  # 1hour 60*60/20
 
@@ -267,12 +267,12 @@
               lifecycle_environment: RHEL7_QA
             controller_username: admin
             controller_password: "{{ admin_password }}"
-            controller_host: "https://{{ student }}.{{ ec2_name_prefix }}.{{ workshop_dns_zone }}"
+            controller_host: "https://{{ student }}.{{ ec2_name_prefix }}.{{ scenario_dns_zone }}"
           register: rhelpromotecvjob01
 
         - name: "Check API until SATELLITE / RHEL - Promote Content View job is successful"
           ansible.builtin.uri:
-            url: "https://{{ student }}.{{ ec2_name_prefix }}.{{ workshop_dns_zone }}/api/v2/jobs/{{ rhelpromotecvjob01.id }}/?format=json"
+            url: "https://{{ student }}.{{ ec2_name_prefix }}.{{ scenario_dns_zone }}/api/v2/jobs/{{ rhelpromotecvjob01.id }}/?format=json"
             user: admin
             password: "{{ admin_password }}"
             force_basic_auth: true
@@ -280,8 +280,8 @@
             return_content: true
             status_code: 200
             validate_certs: false
-          register: workshop_job_templates04
-          until: workshop_job_templates04.json.status == "successful"
+          register: scenario_job_templates04
+          until: scenario_job_templates04.json.status == "successful"
           delay: 20  # Every 20 seconds
           retries: 180  # 1hour 60*60/20
 
@@ -293,12 +293,12 @@
               content_view: RHEL7
             controller_username: admin
             controller_password: "{{ admin_password }}"
-            controller_host: "https://{{ student }}.{{ ec2_name_prefix }}.{{ workshop_dns_zone }}"
+            controller_host: "https://{{ student }}.{{ ec2_name_prefix }}.{{ scenario_dns_zone }}"
           register: rhelpubcvjob02
 
         - name: "Check API until SATELLITE / RHEL - Publish Content View job is successful"
           ansible.builtin.uri:
-            url: "https://{{ student }}.{{ ec2_name_prefix }}.{{ workshop_dns_zone }}/api/v2/jobs/{{ rhelpubcvjob02.id }}/?format=json"
+            url: "https://{{ student }}.{{ ec2_name_prefix }}.{{ scenario_dns_zone }}/api/v2/jobs/{{ rhelpubcvjob02.id }}/?format=json"
             user: admin
             password: "{{ admin_password }}"
             force_basic_auth: true
@@ -306,7 +306,7 @@
             return_content: true
             status_code: 200
             validate_certs: false
-          register: workshop_job_templates05
-          until: workshop_job_templates05.json.status == "successful"
+          register: scenario_job_templates05
+          until: scenario_job_templates05.json.status == "successful"
           delay: 20  # Every 20 seconds
           retries: 180  # 1hour 60*60/20

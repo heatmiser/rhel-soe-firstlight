@@ -25,12 +25,12 @@
 - name: Set AAP local repository on controller node
   include_role:
     name: "{{ playbook_dir|dirname }}/roles/aap_repo"
-  when: workshop_type is defined
+  when: scenario_type is defined
 
 - name: Set AAP local repository on controller node FQCN
   include_role:
-    name: ansible.workshops.aap_repo
-  when: workshop_type is not defined
+    name: ansible.scenarios.aap_repo
+  when: scenario_type is not defined
 
 - name: Install vimrc in home directory
   template:

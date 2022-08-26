@@ -7,8 +7,8 @@
 - name: Install packages
   include_tasks: 15_package_dependencies.yml
 
-- name: common workshop setup for control node
-  include_tasks: 20_all_workshop.yml
+- name: common scenario setup for control node
+  include_tasks: 20_all_scenario.yml
 
 - name: check to see if automation controller is already up and running
   uri:

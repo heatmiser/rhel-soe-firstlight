@@ -6,5 +6,5 @@ Example:
 
 ```
 - include_role:
-    name: ansible.workshops.aws_dns
+    name: ansible.scenarios.aws_dns
 ```

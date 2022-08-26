@@ -8,10 +8,10 @@ argument_specs:
         type: str
         required: true
       ec2_region:
-        description: The AWS EC2 region to deploy the workshop in.
+        description: The AWS EC2 region to deploy the scenario in.
         type: str
         required: true
       username:
-        description: The workshop username.
+        description: The scenario username.
         type: str
         required: true

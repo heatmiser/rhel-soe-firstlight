@@ -1,6 +1,6 @@
 # Common Role
 
-This is the workshop common role (for Linux nodes, specifically RHEL)
+This is the scenario common role (for Linux nodes, specifically RHEL)
 
 
 Sets up the following:
@@ -18,7 +18,7 @@ Example
   become: true
   tasks:
     - include_role:
-        name: ansible.workshops.user_accounts
+        name: ansible.scenarios.user_accounts
     - include_role:
-        name: ansible.workshops.common
+        name: ansible.scenarios.common
 ```

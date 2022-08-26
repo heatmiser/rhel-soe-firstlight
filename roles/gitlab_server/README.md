@@ -11,7 +11,7 @@ This sets up a RHEL device to be a Gitlab Server
     - gitlab
   tasks:
     - include_role:
-        name: ansible.workshops.common
+        name: ansible.scenarios.common
     - include_role:
-        name: ansible.workshops.gitlab_server
+        name: ansible.scenarios.gitlab_server
 ```

@@ -1,22 +1,22 @@
 ---
 argument_specs:
   main:
-    short_description: Workshop setup and config preflight verification.
+    short_description: scenario setup and config preflight verification.
     options:
       ec2_name_prefix:
         description: A prefix for EC2 and DNS resources.
         type: str
         required: true
-      workshop_dns_zone:
-        description: The base DNS zone for the workshop.
+      scenario_dns_zone:
+        description: The base DNS zone for the scenario.
         type: str
         required: true
-      workshop_type:
-        description: The type of the workshop.
+      scenario_type:
+        description: The type of the scenario.
         type: str
         required: true
-      valid_workshop_types:
-        description: A list of valid workshop types.
+      valid_scenario_types:
+        description: A list of valid scenario types.
         type: list
         elements: str
         required: true
@@ -48,7 +48,7 @@ argument_specs:
         elements: str
         required: true
       admin_password:
-        description: The workshop admin password.
+        description: The scenario admin password.
         type: str
         required: true
       default_tower37_url:
@@ -64,21 +64,21 @@ argument_specs:
         type: bool
         required: true
   network:
-    short_description: Verify workshop setup for the network workshop.
+    short_description: Verify scenario setup for the network scenario.
     options:
   security:
-    short_description: Verify workshop setup for the security workshop.
+    short_description: Verify scenario setup for the security scenario.
     options:
       windows_password:
         description: The Windows password.
         type: str
         required: true
-  unsupported_workshop:
-    short_description: Catch-all for unsupported workshop types.
+  unsupported_scenario:
+    short_description: Catch-all for unsupported scenario types.
     options:
-      workshop_type:
-        description: The type of the workshop.
+      scenario_type:
+        description: The type of the scenario.
         type: str
         required: true
   windows:
-    short_description: Verify workshop setup for Windows workshops.
+    short_description: Verify scenario setup for Windows scenarios.

@@ -9,20 +9,20 @@
     exact_count: "{{ student_total }}"
     state: running
     filters:
-      "tag:Workshop_qradar": "{{ ec2_name_prefix }}-qradar"
+      "tag:scenario_qradar": "{{ ec2_name_prefix }}-qradar"
       instance-state-name: running
     tags:
-      Workshop_qradar: "{{ ec2_name_prefix }}-qradar"
-      Workshop: "{{ ec2_name_prefix }}"
-      Workshop_type: "{{ workshop_type }}"
+      scenario_qradar: "{{ ec2_name_prefix }}-qradar"
+      scenario: "{{ ec2_name_prefix }}"
+      scenario_type: "{{ scenario_type }}"
       AWS_USERNAME: "{{ aws_user }}"
       owner: "{{ aws_user }}"
       Info: "AWS_USERNAME that provisioned this-> {{ aws_user }}"
-      Ansible_Workshops: "This was provisioned through the ansible workshops provisioner"
+      Ansible_scenarios: "This was provisioned through the ansible scenarios provisioner"
       Students: "{{ student_total }}"
       username: '{{ ec2_info["rhel8"]["username"] }}'
       short_name: "qradar"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     network:
       assign_public_ip: true
@@ -50,20 +50,20 @@
     exact_count: "{{ student_total }}"
     state: running
     filters:
-      "tag:Workshop_splunk": "{{ ec2_name_prefix }}-splunk"
+      "tag:scenario_splunk": "{{ ec2_name_prefix }}-splunk"
       instance-state-name: running
     tags:
-      Workshop_splunk: "{{ ec2_name_prefix }}-splunk"
-      Workshop: "{{ ec2_name_prefix }}"
-      Workshop_type: "{{ workshop_type }}"
+      scenario_splunk: "{{ ec2_name_prefix }}-splunk"
+      scenario: "{{ ec2_name_prefix }}"
+      scenario_type: "{{ scenario_type }}"
       AWS_USERNAME: "{{ aws_user }}"
       owner: "{{ aws_user }}"
       Info: "AWS_USERNAME that provisioned this-> {{ aws_user }}"
-      Ansible_Workshops: "This was provisioned through the ansible workshops provisioner"
+      Ansible_scenarios: "This was provisioned through the ansible scenarios provisioner"
       Students: "{{ student_total }}"
       username: '{{ ec2_info["rhel8"]["username"] }}'
       short_name: "splunk"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     network:
       assign_public_ip: true
@@ -98,20 +98,20 @@
     exact_count: "{{ student_total }}"
     state: running
     filters:
-      "tag:Workshop_snort": "{{ ec2_name_prefix }}-snort"
+      "tag:scenario_snort": "{{ ec2_name_prefix }}-snort"
       instance-state-name: running
     tags:
-      Workshop_snort: "{{ ec2_name_prefix }}-snort"
-      Workshop: "{{ ec2_name_prefix }}"
-      Workshop_type: "{{ workshop_type }}"
+      scenario_snort: "{{ ec2_name_prefix }}-snort"
+      scenario: "{{ ec2_name_prefix }}"
+      scenario_type: "{{ scenario_type }}"
       AWS_USERNAME: "{{ aws_user }}"
       owner: "{{ aws_user }}"
       Info: "AWS_USERNAME that provisioned this-> {{ aws_user }}"
-      Ansible_Workshops: "This was provisioned through the ansible workshops provisioner"
+      Ansible_scenarios: "This was provisioned through the ansible scenarios provisioner"
       Students: "{{ student_total }}"
       username: '{{ ec2_info["rhel8"]["username"] }}'
       short_name: "snort"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     network:
       assign_public_ip: true
@@ -138,20 +138,20 @@
     exact_count: "{{ student_total }}"
     state: running
     filters:
-      "tag:Workshop_attacker": "{{ ec2_name_prefix }}-attacker"
+      "tag:scenario_attacker": "{{ ec2_name_prefix }}-attacker"
       instance-state-name: running
     tags:
-      Workshop_attacker: "{{ ec2_name_prefix }}-attacker"
-      Workshop: "{{ ec2_name_prefix }}"
-      Workshop_type: "{{ workshop_type }}"
+      scenario_attacker: "{{ ec2_name_prefix }}-attacker"
+      scenario: "{{ ec2_name_prefix }}"
+      scenario_type: "{{ scenario_type }}"
       AWS_USERNAME: "{{ aws_user }}"
       owner: "{{ aws_user }}"
       Info: "AWS_USERNAME that provisioned this-> {{ aws_user }}"
-      Ansible_Workshops: "This was provisioned through the ansible workshops provisioner"
+      Ansible_scenarios: "This was provisioned through the ansible scenarios provisioner"
       Students: "{{ student_total }}"
       username: '{{ ec2_info["rhel8"]["username"] }}'
       short_name: "attacker"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     network:
       assign_public_ip: true
@@ -179,20 +179,20 @@
     user_data: "{{ lookup('template', 'gaia-mgmt-ftw-user-data.sh.j2') }}"
     state: running
     filters:
-      "tag:Workshop_checkpoint_mgmt": "{{ ec2_name_prefix }}-checkpoint"
+      "tag:scenario_checkpoint_mgmt": "{{ ec2_name_prefix }}-checkpoint"
       instance-state-name: running
     tags:
-      Workshop_checkpoint_mgmt: "{{ ec2_name_prefix }}-checkpoint"
-      Workshop: "{{ ec2_name_prefix }}"
-      Workshop_type: "{{ workshop_type }}"
+      scenario_checkpoint_mgmt: "{{ ec2_name_prefix }}-checkpoint"
+      scenario: "{{ ec2_name_prefix }}"
+      scenario_type: "{{ scenario_type }}"
       AWS_USERNAME: "{{ aws_user }}"
       owner: "{{ aws_user }}"
       Info: "AWS_USERNAME that provisioned this-> {{ aws_user }}"
-      Ansible_Workshops: "This was provisioned through the ansible workshops provisioner"
+      Ansible_scenarios: "This was provisioned through the ansible scenarios provisioner"
       Students: "{{ student_total }}"
       username: "{{ ec2_info['checkpoint_mgmt']['username'] }}"
       short_name: "checkpoint_mgmt"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     network:
       assign_public_ip: true
@@ -212,20 +212,20 @@
     state: running
     user_data: "{{ lookup('template', 'windows_userdata.txt.j2') }}"
     filters:
-      "tag:Workshop_windows": "{{ ec2_name_prefix }}-windows"
+      "tag:scenario_windows": "{{ ec2_name_prefix }}-windows"
       instance-state-name: running
     tags:
-      Workshop_windows: "{{ ec2_name_prefix }}-windows"
-      Workshop: "{{ ec2_name_prefix }}"
-      Workshop_type: "{{ workshop_type }}"
+      scenario_windows: "{{ ec2_name_prefix }}-windows"
+      scenario: "{{ ec2_name_prefix }}"
+      scenario_type: "{{ scenario_type }}"
       AWS_USERNAME: "{{ aws_user }}"
       owner: "{{ aws_user }}"
       Info: "AWS_USERNAME that provisioned this-> {{ aws_user }}"
-      Ansible_Workshops: "This was provisioned through the ansible workshops provisioner"
+      Ansible_scenarios: "This was provisioned through the ansible scenarios provisioner"
       Students: "{{ student_total }}"
       username: "{{ ec2_info['windows_ws']['username'] }}"
       short_name: "windows_ws"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     network:
       assign_public_ip: true

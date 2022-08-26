@@ -1,6 +1,6 @@
 ---
 namespace: ansible
-name: workshops
+name: scenarios
 version: 1.0.12
 readme: README.md
 
@@ -28,7 +28,7 @@ build_ignore:
 
 
 # A short summary description of the collection
-description: reusable content from Ansible Automation Workshops
+description: reusable content from Ansible Automation scenarios
 
 license:
   - GPL-2.0-or-later
@@ -70,13 +70,13 @@ dependencies:
   "redhat_cop.tower_utilities": "2.0.1"
 
 # The URL of the originating SCM repository
-repository: https://github.com/ansible/workshops
+repository: https://github.com/ansible/scenarios
 
 # The URL to any online docs
-documentation: https://github.com/ansible/workshops/blob/devel/README.md
+documentation: https://github.com/ansible/scenarios/blob/devel/README.md
 
 # The URL to the homepage of the collection/project
-homepage: https://ansible.github.io/workshops/
+homepage: https://ansible.github.io/scenarios/
 
 # The URL to the collection issue tracker
-issues: https://github.com/ansible/workshops/issues
+issues: https://github.com/ansible/scenarios/issues

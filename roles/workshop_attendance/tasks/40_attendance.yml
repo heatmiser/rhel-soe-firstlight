@@ -53,24 +53,24 @@
   pip:
     name: PyMySQL
 
-- name: make sure any previous runs 'workshop' database is reset
+- name: make sure any previous runs 'scenario' database is reset
   community.mysql.mysql_db:
-    name: workshop
+    name: scenario
     state: absent
 
-- name: Create a new database with name 'workshop'
+- name: Create a new database with name 'scenario'
   community.mysql.mysql_db:
-    name: workshop
+    name: scenario
     state: present
 
 - name: Copy SQL template to server
   template:
-    src: templates/workshop.sql.j2
-    dest: /tmp/workshop.sql
-  register: workshopsql
+    src: templates/scenario.sql.j2
+    dest: /tmp/scenario.sql
+  register: scenariosql
 
-- name: Import SQL file into workshop database
+- name: Import SQL file into scenario database
   community.mysql.mysql_db:
     state: import
-    name: workshop
-    target: /tmp/workshop.sql
+    name: scenario
+    target: /tmp/scenario.sql

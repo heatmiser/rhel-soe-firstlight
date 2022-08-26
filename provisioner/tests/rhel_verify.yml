@@ -23,7 +23,7 @@
           awx.awx.export:
             inventory:
               - all
-            # tower_host: "{{ inventory_hostname|regex_replace('-ansible-1', '') }}.{{ workshop_name }}.rhdemo.io"
+            # tower_host: "{{ inventory_hostname|regex_replace('-ansible-1', '') }}.{{ scenario_name }}.rhdemo.io"
             tower_username: admin
             tower_password: "{{ tower_password }}"
             tower_verify_ssl: false

@@ -2,18 +2,18 @@
 # region where the nodes will live
 ec2_region: us-east-1
 # name prefix for all the VMs
-ec2_name_prefix: TESTWORKSHOP
+ec2_name_prefix: TESTscenario
 # amount of work benches to provision
 student_total: 2
-# workshop is put into rhel mode
-workshop_type: rhel_90
+# scenario is put into rhel mode
+scenario_type: rhel_90
 # Required for AAP download https://access.redhat.com/articles/3626371
 offline_token: "234234234234234234234234234234234234234"
 # Required for podman authentication to registry.redhat.io
 redhat_username: joe@redhat.com
 redhat_password: R3dh4t!
 # DNS domain
-workshop_dns_zone: demoredhat.com
+scenario_dns_zone: demoredhat.com
 ## Optional Variables
 # password used for student account on control node
 admin_password: ansible
@@ -21,6 +21,6 @@ admin_password: ansible
 dns_type: aws
 # this will install Automation controller on all control nodes
 controllerinstall: true
-# this will install all demos from github.com/ansible/product-demos that work for this workshop type
+# this will install all demos from github.com/ansible/product-demos that work for this scenario type
 demo: all
 create_cluster: false

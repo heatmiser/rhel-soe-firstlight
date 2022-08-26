@@ -1,5 +1,5 @@
 ---
-- name: configure rhel workshop for webservers
+- name: configure rhel scenario for webservers
   hosts: lab_hosts
   become: true
   gather_facts: false

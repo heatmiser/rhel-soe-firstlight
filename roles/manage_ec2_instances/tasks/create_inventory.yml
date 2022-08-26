@@ -4,7 +4,7 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_ansible": "{{ec2_name_prefix}}-ansible*"
+      "tag:scenario_ansible": "{{ec2_name_prefix}}-ansible*"
   register: ansible_node_facts
 
 - name: add ansible node to control_nodes group
@@ -23,22 +23,22 @@
   with_items: "{{ ansible_node_facts.instances }}"
 
 - name: setup inventory
-  include_tasks: "inventory/addhost_{{workshop_type}}.yml"
+  include_tasks: "inventory/addhost_{{scenario_type}}.yml"
 
 ################### Write inventories ##################
 - name: Generate student inventories
   template:
-    src: "student_inventory/instances_{{workshop_type}}.j2"
+    src: "student_inventory/instances_{{scenario_type}}.j2"
     dest: "{{ playbook_dir }}/{{ec2_name_prefix}}/student{{item}}-instances.txt"
   with_sequence: count="{{ student_total }}"
 
 - name: Generate student etchosts
   template:
-    src: "etchosts/etchosts_{{workshop_type}}.j2"
+    src: "etchosts/etchosts_{{scenario_type}}.j2"
     dest: "{{ playbook_dir }}/{{ec2_name_prefix}}/student{{item}}-etchosts.txt"
   with_sequence: count="{{ student_total }}"
 
 - name: Generate instructor inventory
   template:
-    src: "instructor_inventory/instructor_inventory_{{workshop_type}}.j2"
+    src: "instructor_inventory/instructor_inventory_{{scenario_type}}.j2"
     dest: "{{ playbook_dir }}/{{ec2_name_prefix}}/instructor_inventory.txt"

@@ -17,7 +17,7 @@ Example of using role:
     app_image: "ansible-automation-platform-2.0-early-access-for-rhel-8-x86_64-files"
     offline_token: "your offline token"
   include_role:
-    name: ansible.workshops.aap_download
+    name: ansible.scenarios.aap_download
 ```
 
 - aap_image is optional and defaults to `ansible-automation-platform-2.0-early-access-for-rhel-8-x86_64-files`

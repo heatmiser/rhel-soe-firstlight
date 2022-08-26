@@ -1,6 +1,6 @@
 ---
 ############## f5 node ##############
-- name: Create EC2 instances for f5 node (workshop_type f5)
+- name: Create EC2 instances for f5 node (scenario_type f5)
   amazon.aws.ec2_instance:
     key_name: "{{ ec2_name_prefix }}-key"
     security_group: "{{ ec2_security_group }}"
@@ -13,13 +13,13 @@
       assign_public_ip: true
     filters:
       instance-state-name: running
-      "tag:Workshop_f5": "{{ ec2_name_prefix }}-f5"
+      "tag:scenario_f5": "{{ ec2_name_prefix }}-f5"
     tags:
-      Workshop_f5: "{{ ec2_name_prefix }}-f5"
-      Workshop: "{{ ec2_name_prefix }}"
+      scenario_f5: "{{ ec2_name_prefix }}-f5"
+      scenario: "{{ ec2_name_prefix }}"
       uuid: "{{ ec2_name_prefix }}"
       guid: "{{ ec2_name_prefix }}"
-      Workshop_type: "{{ workshop_type }}"
+      scenario_type: "{{ scenario_type }}"
       AWS_USERNAME: "{{ aws_user }}"
       owner: "{{ aws_user }}"
       Info: "AWS_USERNAME that provisioned this-> {{ aws_user }}"
@@ -27,7 +27,7 @@
       Students: "{{ student_total }}"
       username: "{{ ec2_info.f5node.username }}"
       short_name: "f5"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
     volumes:
@@ -48,10 +48,10 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_f5": "{{ ec2_name_prefix }}-f5"
+      "tag:scenario_f5": "{{ ec2_name_prefix }}-f5"
   register: f5_output
 
-- name: Ensure tags are present for f5 node (workshop_type f5)
+- name: Ensure tags are present for f5 node (scenario_type f5)
   amazon.aws.ec2_tag:
     region: "{{ ec2_region }}"
     resource: "{{ item.1.instance_id }}"
@@ -65,7 +65,7 @@
     - "{{ f5_output.instances }}"
   when: f5_output.instances|length > 0
 
-- name: Create EC2 instances for node1 node in VPC (workshop_type f5)
+- name: Create EC2 instances for node1 node in VPC (scenario_type f5)
   amazon.aws.ec2_instance:
     key_name: "{{ ec2_name_prefix }}-key"
     security_group: "{{ ec2_security_group }}"
@@ -78,21 +78,21 @@
       assign_public_ip: true
     filters:
       instance-state-name: running
-      "tag:Workshop_node1": "{{ ec2_name_prefix }}-node1"
+      "tag:scenario_node1": "{{ ec2_name_prefix }}-node1"
     tags:
-      Workshop_node1: "{{ ec2_name_prefix }}-node1"
-      Workshop: "{{ ec2_name_prefix }}"
+      scenario_node1: "{{ ec2_name_prefix }}-node1"
+      scenario: "{{ ec2_name_prefix }}"
       uuid: "{{ ec2_name_prefix }}"
       guid: "{{ ec2_name_prefix }}"
-      Workshop_type: "{{ workshop_type }}"
+      scenario_type: "{{ scenario_type }}"
       AWS_USERNAME: "{{ aws_user }}"
       owner: "{{ aws_user }}"
       Info: "AWS_USERNAME that provisioned this-> {{ aws_user }}"
-      Linklight: "This was provisioned through the linklight provisioner for F5 workshop"
+      Linklight: "This was provisioned through the linklight provisioner for F5 scenario"
       Students: "{{ student_total }}"
       short_name: node1
       username: "{{ ec2_info[rhel].username }}"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
     volumes:
@@ -109,10 +109,10 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_node1": "{{ ec2_name_prefix }}-node1"
+      "tag:scenario_node1": "{{ ec2_name_prefix }}-node1"
   register: node1_output
 
-- name: Ensure tags are present for node1 node (workshop_type f5)
+- name: Ensure tags are present for node1 node (scenario_type f5)
   amazon.aws.ec2_tag:
     region: "{{ ec2_region }}"
     resource: "{{ item.1.instance_id }}"
@@ -126,7 +126,7 @@
     - "{{ node1_output.instances }}"
   when: node1_output.instances|length > 0
 
-- name: Create EC2 instances for node2 node in VPC (workshop_type f5)
+- name: Create EC2 instances for node2 node in VPC (scenario_type f5)
   amazon.aws.ec2_instance:
     key_name: "{{ ec2_name_prefix }}-key"
     security_group: "{{ ec2_security_group }}"
@@ -139,21 +139,21 @@
       assign_public_ip: true
     filters:
       instance-state-name: running
-      "tag:Workshop_node2": "{{ ec2_name_prefix }}-node2"
+      "tag:scenario_node2": "{{ ec2_name_prefix }}-node2"
     tags:
-      Workshop_node2: "{{ ec2_name_prefix }}-node2"
-      Workshop: "{{ ec2_name_prefix }}"
+      scenario_node2: "{{ ec2_name_prefix }}-node2"
+      scenario: "{{ ec2_name_prefix }}"
       uuid: "{{ ec2_name_prefix }}"
       guid: "{{ ec2_name_prefix }}"
-      Workshop_type: "{{ workshop_type }}"
+      scenario_type: "{{ scenario_type }}"
       AWS_USERNAME: "{{ aws_user }}"
       owner: "{{ aws_user }}"
       Info: "AWS_USERNAME that provisioned this-> {{ aws_user }}"
-      Linklight: "This was provisioned through the linklight provisioner for F5 workshop"
+      Linklight: "This was provisioned through the linklight provisioner for F5 scenario"
       Students: "{{ student_total }}"
       short_name: node2
       username: "{{ ec2_info[rhel].username }}"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
     volumes:
@@ -170,10 +170,10 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_node2": "{{ ec2_name_prefix }}-node2"
+      "tag:scenario_node2": "{{ ec2_name_prefix }}-node2"
   register: node2_output
 
-- name: Ensure tags are present for node2 node (workshop_type f5)
+- name: Ensure tags are present for node2 node (scenario_type f5)
   amazon.aws.ec2_tag:
     region: "{{ ec2_region }}"
     resource: "{{ item.1.instance_id }}"
@@ -189,14 +189,14 @@
 
 ############## eni check ##############
 
-- name: grab all network interfaces for VPC 1 (workshop_type f5)
+- name: grab all network interfaces for VPC 1 (scenario_type f5)
   amazon.aws.ec2_eni_info:
     region: "{{ ec2_region }}"
     filters:
       vpc-id: "{{ ec2_vpc_id }}"
   register: eni_facts_1
 
-- name: Disable Source/Dest check on instance {{ ec2_vpc_id }} (workshop_type f5)
+- name: Disable Source/Dest check on instance {{ ec2_vpc_id }} (scenario_type f5)
   amazon.aws.ec2_eni:
     eni_id: "{{ item['network_interface_id'] }}"
     region: "{{ ec2_region }}"

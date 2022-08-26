@@ -1,10 +1,10 @@
 ---
-- name: workshop_attendance | Create DNS record
+- name: scenario_attendance | Create DNS record
   become: false
   community.aws.route53:
     state: "{{ s3_state }}"
-    zone: "{{ workshop_dns_zone }}"
-    record: "{{ec2_name_prefix|lower}}.{{workshop_dns_zone}}"
+    zone: "{{ scenario_dns_zone }}"
+    record: "{{ec2_name_prefix|lower}}.{{scenario_dns_zone}}"
     type: A
     overwrite: true
     value: "{{ ansible_host }}"
@@ -17,6 +17,6 @@
 
 - name: set information for instructor
   set_fact:
-    login_website_information: "Auto-Assignment website located at http://{{ ec2_name_prefix|lower }}.{{ workshop_dns_zone|lower }}, instructor can see workbench assignments at http://{{ ec2_name_prefix|lower }}.{{ workshop_dns_zone|lower }}/list.php"
+    login_website_information: "Auto-Assignment website located at http://{{ ec2_name_prefix|lower }}.{{ scenario_dns_zone|lower }}, instructor can see workbench assignments at http://{{ ec2_name_prefix|lower }}.{{ scenario_dns_zone|lower }}/list.php"
   delegate_to: localhost
   run_once: true

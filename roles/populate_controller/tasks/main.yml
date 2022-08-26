@@ -1,9 +1,9 @@
 ---
-- name: load automation controller vars for specific workshop type
+- name: load automation controller vars for specific scenario type
   include_vars: "{{ item }}"
   with_first_found:
-    - "{{role_path}}/vars/{{ workshop_type }}.yml"
-    - "{{role_path}}/vars/unsupported_workshop.yml"
+    - "{{role_path}}/vars/{{ scenario_type }}.yml"
+    - "{{role_path}}/vars/unsupported_scenario.yml"
 
 - name: ensure controller is online and working
   uri:
@@ -21,7 +21,7 @@
 #### CREDENTIAL
 - name: add SSH credential into Automation controller
   awx.awx.credential:
-    name: "Workshop Credential"
+    name: "scenario Credential"
     credential_type: Machine
     organization: "Default"
     controller_username: admin
@@ -42,22 +42,22 @@
     controller_host: "https://{{ ansible_host }}"
     validate_certs: false
     inputs:
-      host: "{{ student }}.{{ ec2_name_prefix }}.{{ workshop_dns_zone }}"
+      host: "{{ student }}.{{ ec2_name_prefix }}.{{ scenario_dns_zone }}"
       username: admin
       password: "{{ admin_password }}"
 #### END OF CREDENTIAL
 
 #### Inventory
-- name: create workshop inventory
+- name: create scenario inventory
   awx.awx.inventory:
-    name: "Workshop Inventory"
+    name: "scenario Inventory"
     organization: "Default"
     controller_username: admin
     controller_password: "{{ admin_password }}"
     controller_host: "https://{{ ansible_host }}"
     validate_certs: false
-  register: workshop_inventory
-  until: workshop_inventory is success
+  register: scenario_inventory
+  until: scenario_inventory is success
   delay: 3
   retries: 5
 
@@ -71,7 +71,7 @@
 
 - name: import inventory
   become_user: awx
-  shell: 'tower-manage inventory_import --source=/var/lib/awx/hosts --inventory-name="Workshop Inventory"'
+  shell: 'tower-manage inventory_import --source=/var/lib/awx/hosts --inventory-name="scenario Inventory"'
   register: import_inventory
   until: import_inventory is not failed
   retries: 5
@@ -136,19 +136,19 @@
     validate_certs: false
 #### END OF REMOVE BUILT-IN DEMO CONTENT
 
-# Workshop specific execution environments
-- name: Add specific workshop execution environment
+# scenario specific execution environments
+- name: Add specific scenario execution environment
   awx.awx.execution_environment:
-    name: "{{ workshop_type }} workshop execution environment"
-    image: "{{ lookup('vars', workshop_type + '_ee') }}"
+    name: "{{ scenario_type }} scenario execution environment"
+    image: "{{ lookup('vars', scenario_type + '_ee') }}"
     pull: missing
     controller_username: admin
     controller_password: "{{ admin_password }}"
     controller_host: "https://{{ ansible_host }}"
     validate_certs: false
 
-- name: setup workshop specific controller information
+- name: setup scenario specific controller information
   include_tasks: "{{item}}"
   with_first_found:
-    - "{{role_path}}/tasks/{{workshop_type}}.yml"
-    - "{{role_path}}/tasks/unsupported_workshop.yml"
+    - "{{role_path}}/tasks/{{scenario_type}}.yml"
+    - "{{role_path}}/tasks/unsupported_scenario.yml"

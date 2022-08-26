@@ -1,6 +1,6 @@
 {
-    "name": "Ansible Workshop Inventory",
-    "description": "workshop hosts",
+    "name": "Ansible scenario Inventory",
+    "description": "scenario hosts",
     "organization": 1,
     "kind": "",
     "host_filter": null,

@@ -6,7 +6,7 @@ ansible-navigator:
       - /home/{{ username }}/lab_inventory/hosts
 
   execution-environment:
-    image: {{ lookup('vars', workshop_type + '_ee') }}
+    image: {{ lookup('vars', scenario_type + '_ee') }}
     enabled: true
     container-engine: podman
     pull:

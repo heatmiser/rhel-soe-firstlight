@@ -4,7 +4,7 @@ argument_specs:
     short_description: Set up local user accounts.
   options:
     username:
-      description: The workshop username.
+      description: The scenario username.
       type: str
       required: true
     admin_password:

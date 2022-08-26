@@ -1,12 +1,12 @@
 {
   "all_rules":
-  {% if workshop_type == 'demo' %}
-  {{ (workshops.common.ports + workshops.f5.ports + workshops.network.ports) | to_nice_json }}
+  {% if scenario_type == 'demo' %}
+  {{ (scenarios.common.ports + scenarios.f5.ports + scenarios.network.ports) | to_nice_json }}
   {% else %}
-  {% if workshops[workshop_type].ports is defined %}
-  {{ (workshops.common.ports + workshops[workshop_type].ports) | to_nice_json }}
+  {% if scenarios[scenario_type].ports is defined %}
+  {{ (scenarios.common.ports + scenarios[scenario_type].ports) | to_nice_json }}
   {% else %}
-  {{ workshops.common.ports | to_nice_json }}
+  {{ scenarios.common.ports | to_nice_json }}
   {% endif %}
   {% endif %}
 }

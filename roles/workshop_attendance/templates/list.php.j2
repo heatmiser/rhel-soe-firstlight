@@ -6,7 +6,7 @@ $sql_user = "root";
 $sql_pass = "";
 $login_pass = "{{ admin_password }}";
 
-$mydb="workshop";
+$mydb="scenario";
 
 try {
   $db = new \PDO("mysql:host=$sql_server;port=$port;dbname=$mydb;charset=utf8", $sql_user, $sql_pass);
@@ -184,7 +184,7 @@ div.small {
 
 <div data-role="page" id="pageone">
   <div data-role="header">
-    <h1>Ansible {{ workshop_type | capitalize}} Workshop</h1>
+    <h1>Ansible {{ scenario_type | capitalize}} scenario</h1>
   </div>
   <div data-role="main" style="background-color: !#FFF"><center><br><br>
 

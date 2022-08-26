@@ -1,3 +1,3 @@
 # Devops Role
 
-This is for the `workshop_type: devops` 
+This is for the `scenario_type: devops` 

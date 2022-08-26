@@ -12,14 +12,14 @@ Example:
   gather_facts: true
   become: true
   vars:
-    workshop_dns_zone: "demoredhat.com"
+    scenario_dns_zone: "demoredhat.com"
     admin_password: ansible123
     username: "student1"
     ec2_name_prefix: "my_workbench"
 
   tasks:
     - include_role:
-        name: ansible.workshops.code_server
+        name: ansible.scenarios.code_server
 ```
 
 # Requirements

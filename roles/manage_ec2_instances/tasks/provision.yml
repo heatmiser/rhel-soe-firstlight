@@ -1,18 +1,18 @@
 ---
-- name: ensure workshop folder {{ ec2_name_prefix }} exists
+- name: ensure scenario folder {{ ec2_name_prefix }} exists
   file:
     path: "{{ playbook_dir }}/{{ ec2_name_prefix }}"
     state: directory
 
-## These AWS resources are used for every workshop type
+## These AWS resources are used for every scenario type
 ## This includes VPC, subnet, Security Group, Internet Gateway and route table
 - name: provision aws resources
   include_tasks: resources/resources.yml
 
-## This duplicates the above when network workshop uses 2 VPCs
+## This duplicates the above when network scenario uses 2 VPCs
 - name: provision networking aws resources
-  include_tasks: resources/resources_{{workshop_type}}.yml
-  when: workshop_type == 'network' or workshop_type == 'demo'
+  include_tasks: resources/resources_{{scenario_type}}.yml
+  when: scenario_type == 'network' or scenario_type == 'demo'
 
 - name: find ami if no ami provided
   when: not pre_build|bool
@@ -63,11 +63,11 @@
 
 ## find AMI - amazon machine images dynamically
 - name: find correct AMI
-  include_tasks: 'ami_find/ami_find_{{ workshop_type }}.yml'
+  include_tasks: 'ami_find/ami_find_{{ scenario_type }}.yml'
 
 ## Instance creation
-- name: provision workshop instances
-  include_tasks: 'instances/instances_{{ workshop_type }}.yml'
+- name: provision scenario instances
+  include_tasks: 'instances/instances_{{ scenario_type }}.yml'
 
 - name: create instructor_inventory, and student files
   include_tasks: create_inventory.yml

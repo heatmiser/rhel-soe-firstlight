@@ -15,7 +15,7 @@ Example:
 
     - name: configure SSL cert for Automation Controller
       vars:
-        dns_name: "{{username}}.{{ec2_name_prefix|lower}}.{{workshop_dns_zone}}"
+        dns_name: "{{username}}.{{ec2_name_prefix|lower}}.{{scenario_dns_zone}}"
       include_role:
-        name: ansible.workshops.issue_cert
+        name: ansible.scenarios.issue_cert
 ```

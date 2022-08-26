@@ -1,5 +1,5 @@
 ---
-- name: change password to workshop default
+- name: change password to scenario default
   ansible.netcommon.cli_command:
     command: "{{ item }}"
     prompt:

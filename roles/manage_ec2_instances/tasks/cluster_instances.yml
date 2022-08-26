@@ -9,20 +9,20 @@
     exact_count: "{{ student_total }}"
     state: running
     filters:
-      "tag:Workshop_ansible": "{{ ec2_name_prefix }}-ansible-{{ sequence }}"
+      "tag:scenario_ansible": "{{ ec2_name_prefix }}-ansible-{{ sequence }}"
       instance-state-name: running
     tags:
-      Workshop_ansible: "{{ ec2_name_prefix }}-ansible-{{ sequence }}"
-      Workshop: "{{ ec2_name_prefix }}"
-      Workshop_type: "{{ workshop_type }}"
+      scenario_ansible: "{{ ec2_name_prefix }}-ansible-{{ sequence }}"
+      scenario: "{{ ec2_name_prefix }}"
+      scenario_type: "{{ scenario_type }}"
       AWS_USERNAME: "{{ aws_user }}"
       owner: "{{ aws_user }}"
       Info: "AWS_USERNAME that provisioned this-> {{ aws_user }}"
-      Ansible_Workshops: "This was provisioned through the ansible workshops provisioner"
+      Ansible_scenarios: "This was provisioned through the ansible scenarios provisioner"
       Students: "{{ student_total }}"
       username: "{{ ec2_info[control_type].username }}"
       short_name: "ansible-{{ sequence }}"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     network:
       assign_public_ip: true
@@ -42,7 +42,7 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_ansible": "{{ ec2_name_prefix }}-ansible-{{ sequence }}"
+      "tag:scenario_ansible": "{{ ec2_name_prefix }}-ansible-{{ sequence }}"
   register: control_output
 
 - name: Ensure tags are present
@@ -54,7 +54,7 @@
       Name: "{{ ec2_name_prefix }}-student{{ item.0 + 1 }}-ansible-{{ sequence }}"
       Index: "{{ item[0] }}"
       Student: "student{{ item.0 + 1 }}"
-      dns: "{% if dns_type != 'none' %}student{{ item.0 + 1 }}.{{ ec2_name_prefix|lower }}.{{ workshop_dns_zone }} {% else %} none {% endif %}"
+      dns: "{% if dns_type != 'none' %}student{{ item.0 + 1 }}.{{ ec2_name_prefix|lower }}.{{ scenario_dns_zone }} {% else %} none {% endif %}"
       launch_time: "{{ item.1.launch_time }}"
   with_indexed_items:
     - "{{ control_output.instances }}"
@@ -64,7 +64,7 @@
   block:
     - name: GRAB ROUTE53 ZONE ID
       route53_zone:
-        zone: "{{ workshop_dns_zone }}"
+        zone: "{{ scenario_dns_zone }}"
       register: AWSINFO
 
     - name: Create VPC Lock Down role
@@ -72,7 +72,7 @@
         name: "VPCLockDown_{{ ec2_name_prefix }}_student{{ item }}"
         assume_role_policy_document: "{{ lookup('file','AssumeRole_policy.json') }}"
         create_instance_profile: true
-        description: VPC Lockdown role for "{{ ec2_name_prefix }}" workshop
+        description: VPC Lockdown role for "{{ ec2_name_prefix }}" scenario
       loop: "{{ range(1, student_total + 1)|list }}"
 
     - name: Create control node instance role
@@ -80,7 +80,7 @@
         name: "ControlNode_{{ ec2_name_prefix }}_student{{ item }}"
         assume_role_policy_document: "{{ lookup('file','AssumeRole_policy.json') }}"
         create_instance_profile: true
-        description: Control node instance role for "{{ ec2_name_prefix }}" workshop
+        description: Control node instance role for "{{ ec2_name_prefix }}" scenario
       loop: "{{ range(1, student_total + 1)|list }}"
 
     - name: Generate IAM policy for control node IAM instance role

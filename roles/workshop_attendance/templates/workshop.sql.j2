@@ -21,20 +21,20 @@ CREATE TABLE IF NOT EXISTS `users` (
     {% if hostvars[host].student is defined and "student" + number | string == hostvars[host].student %}
       {% if hostvars[host].student is defined and "student" + number | string == hostvars[host].student %}
       INSERT INTO `users` (`id`, `ip`, `vscode`, `vscode_display`, `gitlab`, `hub`, `controller`, `username`, `password`) VALUES ({{ number }},'{{ hostvars[host].ansible_host }}',
-      {% if workshop_type == "windows" %}
-        'https://student{{ number }}-code.{{ ec2_name_prefix }}.{{ workshop_dns_zone }}/?folder=vscode-remote%3A%2F%2Fstudent{{ number }}-code.{{ ec2_name_prefix }}.{{ workshop_dns_zone }}%2Fhome%2Fstudent%2Fwindows-workshop%2Fworkshop_project',
+      {% if scenario_type == "windows" %}
+        'https://student{{ number }}-code.{{ ec2_name_prefix }}.{{ scenario_dns_zone }}/?folder=vscode-remote%3A%2F%2Fstudent{{ number }}-code.{{ ec2_name_prefix }}.{{ scenario_dns_zone }}%2Fhome%2Fstudent%2Fwindows-scenario%2Fscenario_project',
       {% else %}
-        'https://student{{ number }}-code.{{ ec2_name_prefix }}.{{ workshop_dns_zone }}',
+        'https://student{{ number }}-code.{{ ec2_name_prefix }}.{{ scenario_dns_zone }}',
       {% endif %}
-        'https://student{{ number }}-code.{{ ec2_name_prefix }}.{{ workshop_dns_zone }}',
-      {% if workshop_type == "windows" %}
-        'https://gitlab.{{ ec2_name_prefix }}.{{ workshop_dns_zone }}',
+        'https://student{{ number }}-code.{{ ec2_name_prefix }}.{{ scenario_dns_zone }}',
+      {% if scenario_type == "windows" %}
+        'https://gitlab.{{ ec2_name_prefix }}.{{ scenario_dns_zone }}',
       {% else %}
         '',
       {% endif %}
       {% if automation_hub is defined and automation_hub|bool %}
         {% if dns_type != 'none' %}
-          'https://hub.{{ ec2_name_prefix }}.{{ workshop_dns_zone }}',
+          'https://hub.{{ ec2_name_prefix }}.{{ scenario_dns_zone }}',
         {% else %}
           'https://{{ hostvars["automation-hub-host"].ansible_host }}',
         {% endif %}
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `users` (
       {% endif %}
       {% if controllerinstall is defined and controllerinstall %}
         {% if dns_type != 'none' %}
-          'https://student{{ number }}.{{ ec2_name_prefix }}.{{ workshop_dns_zone }}',
+          'https://student{{ number }}.{{ ec2_name_prefix }}.{{ scenario_dns_zone }}',
         {% else %}
           'https://{{ hostvars[host].ansible_host }}',
         {% endif %}

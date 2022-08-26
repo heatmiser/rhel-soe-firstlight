@@ -1,5 +1,5 @@
 ---
-- name: workshop_attendance | Create DNS record
+- name: scenario_attendance | Create DNS record
   debug:
     msg: "No DNS is being used, reverting to IP address information"
 

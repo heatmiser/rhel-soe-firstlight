@@ -23,10 +23,10 @@
     region: "{{ ec2_region }}"
     exact_count: "{{ student_total }}"
     count_tag:
-      Workshop_netapp: "{{ ec2_name_prefix }}-netapp"
+      scenario_netapp: "{{ ec2_name_prefix }}-netapp"
     tags:
-      Workshop_netapp: "{{ ec2_name_prefix }}-netapp"
-      Workshop: "{{ ec2_name_prefix }}"
+      scenario_netapp: "{{ ec2_name_prefix }}-netapp"
+      scenario: "{{ ec2_name_prefix }}"
       uuid: "{{ ec2_name_prefix }}"
       guid: "{{ ec2_name_prefix }}"
       AWS_USERNAME: "{{ aws_user }}"
@@ -36,7 +36,7 @@
       Students: "{{ student_total }}"
       short_name: "netapp"
       username: "{{ ec2_info[rhel].username }}"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
     volumes:
@@ -57,7 +57,7 @@
       Index: "{{ item[0] }}"
       Student: "student{{ item.0 + 1 }}"
       launch_time: "{{ item.1.launch_time }}"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
   with_indexed_items:
     - "{{ netapp_output.instances }}"
   when: netapp_output.instance_ids is not none

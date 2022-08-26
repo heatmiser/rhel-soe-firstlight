@@ -9,11 +9,11 @@
     region: "{{ ec2_region }}"
     exact_count: "{{ student_total }}"
     count_tag:
-      Workshop_node1: "{{ ec2_name_prefix }}-node1"
+      scenario_node1: "{{ ec2_name_prefix }}-node1"
     tags:
-      Workshop_node1: "{{ ec2_name_prefix }}-node1"
-      Workshop_type: "{{ workshop_type }}"
-      Workshop: "{{ ec2_name_prefix }}"
+      scenario_node1: "{{ ec2_name_prefix }}-node1"
+      scenario_type: "{{ scenario_type }}"
+      scenario: "{{ ec2_name_prefix }}"
       uuid: "{{ ec2_name_prefix }}"
       guid: "{{ ec2_name_prefix }}"
       AWS_USERNAME: "{{ aws_user }}"
@@ -24,7 +24,7 @@
       short_name: "dev_web1"
       username: "{{ ec2_info[rhel].username }}"
       Devops_tag: dev_web1
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
     volumes:
@@ -58,11 +58,11 @@
     region: "{{ ec2_region }}"
     exact_count: "{{ student_total }}"
     count_tag:
-      Workshop_node2: "{{ ec2_name_prefix }}-node2"
+      scenario_node2: "{{ ec2_name_prefix }}-node2"
     tags:
-      Workshop_node2: "{{ ec2_name_prefix }}-node2"
-      Workshop_type: "{{ workshop_type }}"
-      Workshop: "{{ ec2_name_prefix }}"
+      scenario_node2: "{{ ec2_name_prefix }}-node2"
+      scenario_type: "{{ scenario_type }}"
+      scenario: "{{ ec2_name_prefix }}"
       uuid: "{{ ec2_name_prefix }}"
       guid: "{{ ec2_name_prefix }}"
       AWS_USERNAME: "{{ aws_user }}"
@@ -73,7 +73,7 @@
       short_name: "dev_web2"
       username: "{{ ec2_info[rhel].username }}"
       Devops_tag: dev_web2
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
     volumes:
@@ -107,11 +107,11 @@
     region: "{{ ec2_region }}"
     exact_count: "{{ student_total }}"
     count_tag:
-      Workshop_node3: "{{ ec2_name_prefix }}-node3"
+      scenario_node3: "{{ ec2_name_prefix }}-node3"
     tags:
-      Workshop_node3: "{{ ec2_name_prefix }}-node3"
-      Workshop_type: "{{ workshop_type }}"
-      Workshop: "{{ ec2_name_prefix }}"
+      scenario_node3: "{{ ec2_name_prefix }}-node3"
+      scenario_type: "{{ scenario_type }}"
+      scenario: "{{ ec2_name_prefix }}"
       uuid: "{{ ec2_name_prefix }}"
       guid: "{{ ec2_name_prefix }}"
       AWS_USERNAME: "{{ aws_user }}"
@@ -122,7 +122,7 @@
       short_name: "prod_web1"
       username: "{{ ec2_info[rhel].username }}"
       Devops_tag: prod_web1
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
     volumes:
@@ -156,11 +156,11 @@
     region: "{{ ec2_region }}"
     exact_count: "{{ student_total }}"
     count_tag:
-      Workshop_node4: "{{ ec2_name_prefix }}-node4"
+      scenario_node4: "{{ ec2_name_prefix }}-node4"
     tags:
-      Workshop_node4: "{{ ec2_name_prefix }}-node4"
-      Workshop_type: "{{ workshop_type }}"
-      Workshop: "{{ ec2_name_prefix }}"
+      scenario_node4: "{{ ec2_name_prefix }}-node4"
+      scenario_type: "{{ scenario_type }}"
+      scenario: "{{ ec2_name_prefix }}"
       uuid: "{{ ec2_name_prefix }}"
       guid: "{{ ec2_name_prefix }}"
       AWS_USERNAME: "{{ aws_user }}"
@@ -171,7 +171,7 @@
       short_name: "prod_web2"
       username: "{{ ec2_info[rhel].username }}"
       Devops_tag: prod_web2
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
     volumes:

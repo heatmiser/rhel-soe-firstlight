@@ -4,7 +4,7 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_node7": "{{ec2_name_prefix}}-node7"
+      "tag:scenario_node7": "{{ec2_name_prefix}}-node7"
   register: node7_node_facts
 
 - name: grab facts for node8 node
@@ -12,7 +12,7 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_node8": "{{ec2_name_prefix}}-node8"
+      "tag:scenario_node8": "{{ec2_name_prefix}}-node8"
   register: node8_node_facts
 
 - name: grab facts for node9 node
@@ -20,7 +20,7 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_node9": "{{ec2_name_prefix}}-node9"
+      "tag:scenario_node9": "{{ec2_name_prefix}}-node9"
   register: node9_node_facts
 
 - name: add hosts to groups (ANSIBLE RHEL MODE)

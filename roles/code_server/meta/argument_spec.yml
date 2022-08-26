@@ -8,15 +8,15 @@ argument_specs:
         type: bool
         required: true
       username:
-        description: The workshop username.
+        description: The scenario username.
         type: str
         required: true
       ec2_name_prefix:
         description: A prefix for EC2 and DNS resources.
         type: str
         required: true
-      workshop_dns_zone:
-        description: The base DNS zone for the workshop.
+      scenario_dns_zone:
+        description: The base DNS zone for the scenario.
         type: str
         required: true
   codeserver:
@@ -29,12 +29,12 @@ argument_specs:
           - present
           - absent
         required: true
-      workshop_dns_zone:
-        description: The base DNS zone for the workshop.
+      scenario_dns_zone:
+        description: The base DNS zone for the scenario.
         type: str
         required: true
       username:
-        description: The workshop username.
+        description: The scenario username.
         type: str
         required: true
       ec2_name_prefix:
@@ -55,8 +55,8 @@ argument_specs:
           - present
           - absent
         required: true
-      workshop_dns_zone:
-        description: The base DNS zone for the workshop.
+      scenario_dns_zone:
+        description: The base DNS zone for the scenario.
         type: str
         required: true
       ec2_name_prefix:
@@ -64,6 +64,6 @@ argument_specs:
         type: str
         required: true
       student_total:
-        description: The total number of students for the workshop.
+        description: The total number of students for the scenario.
         type: int
         required: true

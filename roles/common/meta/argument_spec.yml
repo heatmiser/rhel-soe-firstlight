@@ -12,7 +12,7 @@ argument_specs:
         type: int
         required: true
       username:
-        description: The workshop username.
+        description: The scenario username.
         type: str
         required: true
   windows:

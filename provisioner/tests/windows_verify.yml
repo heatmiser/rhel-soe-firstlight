@@ -18,7 +18,7 @@
           awx.awx.tower_receive:
             inventory:
               - all
-            tower_host: "{{ inventory_hostname|regex_replace('-ansible-1', '') }}.{{ workshop_name }}.rhdemo.io"
+            tower_host: "{{ inventory_hostname|regex_replace('-ansible-1', '') }}.{{ scenario_name }}.rhdemo.io"
             tower_username: admin
             tower_password: "{{ tower_password }}"
           register: export_assets
@@ -28,7 +28,7 @@
 
         - name: Check for local project directory
           file:
-            path: /home/student1/windows-workshop/workshop_project/
+            path: /home/student1/windows-scenario/scenario_project/
             state: directory
           become: true
           become_user: student1

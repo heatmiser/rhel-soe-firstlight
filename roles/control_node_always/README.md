@@ -1,6 +1,6 @@
 # Control Node Role
 
-This role will setup control nodes for Ansible Automation Workshops (same for all workshop types)
+This role will setup control nodes for Ansible Automation scenarios (same for all scenario types)
 
 Example:
 
@@ -11,5 +11,5 @@ Example:
   become: true
   tasks:
     - include_role:
-        name: ansible.workshops.control_node_always
+        name: ansible.scenarios.control_node_always
 ```

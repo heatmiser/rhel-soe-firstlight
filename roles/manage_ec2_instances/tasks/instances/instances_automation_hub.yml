@@ -12,21 +12,21 @@
       assign_public_ip: true
     filters:
       instance-state-name: running
-      "tag:Workshop_automation-hub": "{{ ec2_name_prefix }}-automation-hub"
+      "tag:scenario_automation-hub": "{{ ec2_name_prefix }}-automation-hub"
     tags:
       Name: "{{ ec2_name_prefix }}-hub"
-      Workshop_automation-hub: "{{ ec2_name_prefix }}-automation-hub"
-      App: AnsibleWorkshop
-      Workshop: "{{ ec2_name_prefix }}"
-      Workshop_type: "{{ workshop_type }}"
+      scenario_automation-hub: "{{ ec2_name_prefix }}-automation-hub"
+      App: Ansiblescenario
+      scenario: "{{ ec2_name_prefix }}"
+      scenario_type: "{{ scenario_type }}"
       AWS_USERNAME: "{{ aws_user }}"
       Info: "AWS_USERNAME that provisioned this-> {{ aws_user }}"
-      Ansible_Workshops: "This was provisioned through the ansible workshops provisioner"
+      Ansible_scenarios: "This was provisioned through the ansible scenarios provisioner"
       Students: "{{ student_total }}"
       username: "{{ ec2_info[hub_type].username }}"
       short_name: "automation-hub"
-      long_name: "automation-hub.{{ ec2_name_prefix }}.{{ workshop_dns_zone | default ('') }}"
-      ansible-workshops: "true"
+      long_name: "automation-hub.{{ ec2_name_prefix }}.{{ scenario_dns_zone | default ('') }}"
+      ansible-scenarios: "true"
       owner: "{{ aws_user }}"
     wait: "{{ ec2_wait }}"
     vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"

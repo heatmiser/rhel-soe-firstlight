@@ -12,13 +12,13 @@
     state: running
     filters:
       instance-state-name: running
-      "tag:Workshop_node4": "{{ ec2_name_prefix }}-node4"
+      "tag:scenario_node4": "{{ ec2_name_prefix }}-node4"
     tags:
-      Workshop_node4: "{{ ec2_name_prefix }}-node4"
-      Workshop: "{{ ec2_name_prefix }}"
+      scenario_node4: "{{ ec2_name_prefix }}-node4"
+      scenario: "{{ ec2_name_prefix }}"
       uuid: "{{ ec2_name_prefix }}"
       guid: "{{ ec2_name_prefix }}"
-      Workshop_type: "{{ workshop_type }}"
+      scenario_type: "{{ scenario_type }}"
       AWS_USERNAME: "{{ aws_user }}"
       owner: "{{ aws_user }}"
       Info: "AWS_USERNAME that provisioned this-> {{ aws_user }}"
@@ -26,7 +26,7 @@
       Students: "{{ student_total }}"
       short_name: "node4"
       username: "{{ ec2_info[centos7].username }}"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
     volumes:
@@ -43,7 +43,7 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_node4": "{{ ec2_name_prefix }}-node4"
+      "tag:scenario_node4": "{{ ec2_name_prefix }}-node4"
   register: node4_output
 
 - name: Ensure tags are present for node4
@@ -90,13 +90,13 @@
     state: running
     filters:
       instance-state-name: running
-      "tag:Workshop_node5": "{{ ec2_name_prefix }}-node5"
+      "tag:scenario_node5": "{{ ec2_name_prefix }}-node5"
     tags:
-      Workshop_node5: "{{ ec2_name_prefix }}-node5"
-      Workshop: "{{ ec2_name_prefix }}"
+      scenario_node5: "{{ ec2_name_prefix }}-node5"
+      scenario: "{{ ec2_name_prefix }}"
       uuid: "{{ ec2_name_prefix }}"
       guid: "{{ ec2_name_prefix }}"
-      Workshop_type: "{{ workshop_type }}"
+      scenario_type: "{{ scenario_type }}"
       AWS_USERNAME: "{{ aws_user }}"
       owner: "{{ aws_user }}"
       Info: "AWS_USERNAME that provisioned this-> {{ aws_user }}"
@@ -104,7 +104,7 @@
       Students: "{{ student_total }}"
       short_name: "node5"
       username: "{{ ec2_info[centos7].username }}"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
     volumes:
@@ -121,7 +121,7 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_node5": "{{ ec2_name_prefix }}-node5"
+      "tag:scenario_node5": "{{ ec2_name_prefix }}-node5"
   register: node5_output
 
 - name: Ensure tags are present for node5
@@ -168,13 +168,13 @@
     state: running
     filters:
       instance-state-name: running
-      "tag:Workshop_node6": "{{ ec2_name_prefix }}-node6"
+      "tag:scenario_node6": "{{ ec2_name_prefix }}-node6"
     tags:
-      Workshop_node6: "{{ ec2_name_prefix }}-node6"
-      Workshop: "{{ ec2_name_prefix }}"
+      scenario_node6: "{{ ec2_name_prefix }}-node6"
+      scenario: "{{ ec2_name_prefix }}"
       uuid: "{{ ec2_name_prefix }}"
       guid: "{{ ec2_name_prefix }}"
-      Workshop_type: "{{ workshop_type }}"
+      scenario_type: "{{ scenario_type }}"
       AWS_USERNAME: "{{ aws_user }}"
       owner: "{{ aws_user }}"
       Info: "AWS_USERNAME that provisioned this-> {{ aws_user }}"
@@ -182,7 +182,7 @@
       Students: "{{ student_total }}"
       short_name: "node6"
       username: "{{ ec2_info[centos7].username }}"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
     volumes:
@@ -199,7 +199,7 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_node6": "{{ ec2_name_prefix }}-node6"
+      "tag:scenario_node6": "{{ ec2_name_prefix }}-node6"
   register: node6_output
 
 - name: Ensure tags are present for node6

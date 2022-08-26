@@ -1,4 +1,4 @@
 ---
-## re-use RHEL workshop code
+## re-use RHEL scenario code
 - name: provision aws resources
   include_tasks: addhost_rhel.yml

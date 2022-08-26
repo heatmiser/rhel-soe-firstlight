@@ -3,12 +3,12 @@ argument_specs:
   main:
     short_description: Verify prerequisites for deploying on AWS.
     options:
-      workshop_dns_zone:
-        description: The base DNS zone for the workshop.
+      scenario_dns_zone:
+        description: The base DNS zone for the scenario.
         type: str
         required: true
       ec2_region:
-        description: The AWS EC2 region to deploy the workshop in.
+        description: The AWS EC2 region to deploy the scenario in.
         type: str
         required: true
       aws_az_deny_list:

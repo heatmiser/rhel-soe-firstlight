@@ -6,7 +6,7 @@ import string
 
 
 def main():
-    change_id = os.getenv('WORKSHOPS_CHANGE_ID')
+    change_id = os.getenv('scenarioS_CHANGE_ID')
     admin_password = ''.join(random.choice(string.ascii_lowercase) for i in range(12))
     name_prefix_identifier = ''.join(random.choice(string.ascii_lowercase) for i in range(8))
     if change_id:
@@ -21,8 +21,8 @@ ec2_name_prefix: %s
 
     if change_id:
         with open('provisioner/tests/ci-common.yml', 'a') as f:
-            f.write("""ansible_workshops_refspec: +refs/pull/%s/head:refs/remotes/origin/PR-%s
-ansible_workshops_version: PR-%s
+            f.write("""ansible_scenarios_refspec: +refs/pull/%s/head:refs/remotes/origin/PR-%s
+ansible_scenarios_version: PR-%s
 """ % (change_id, change_id, change_id))
 
 

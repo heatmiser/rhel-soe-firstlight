@@ -1,4 +1,4 @@
 ---
-## re-use RHEL workshop code
+## re-use RHEL scenario code
 - name: find ami
   include_tasks: ami_find_rhel.yml

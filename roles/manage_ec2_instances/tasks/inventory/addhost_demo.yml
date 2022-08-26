@@ -1,16 +1,16 @@
 ---
 ## all your base are belong to us
-- name: inventory for rhel workshop
+- name: inventory for rhel scenario
   include_tasks: addhost_rhel.yml
 
-- name: inventory for network workshop
+- name: inventory for network scenario
   include_tasks: addhost_network.yml
 
-- name: inventory for f5 workshop
+- name: inventory for f5 scenario
   include_tasks: addhost_f5.yml
 
-- name: inventory for windows workshop
+- name: inventory for windows scenario
   include_tasks: addhost_windows.yml
 
-- name: inventory for windows workshop
+- name: inventory for windows scenario
   include_tasks: addhost_security.yml

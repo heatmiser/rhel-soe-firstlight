@@ -1,7 +1,7 @@
 ---
 ansible-navigator:
   execution-environment:
-    image: quay.io/acme_corp/workshop_ee
+    image: quay.io/acme_corp/scenario_ee
     enabled: true
     container-engine: podman
     pull:

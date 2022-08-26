@@ -1,5 +1,5 @@
 ---
-workshops:
+scenarios:
   common:
     ports:
       - proto: 47

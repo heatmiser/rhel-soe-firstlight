@@ -12,7 +12,7 @@
 - name: check route53 information
   when: dns_type == "aws"
   block:
-    - name: check for underscores in workshop name
+    - name: check for underscores in scenario name
       fail:
         msg: "Amazon AWS does not allow underscores _ for s3 websites, please see https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html"
       when:
@@ -21,17 +21,17 @@
     - name: does route53 zone exist
       check_mode: true
       community.aws.route53_zone:
-        zone: "{{ workshop_dns_zone }}"
+        zone: "{{ scenario_dns_zone }}"
         state: present
       register: test
 
-    - name: make sure workshop_dns_zone is owned by your account
+    - name: make sure scenario_dns_zone is owned by your account
       assert:
         that:
           - test.zone_id is not none
         msg:
-          - "You must have a valid route53 zone configured for workshop_dns_zone"
-          - "Right now the workshop_dns_zone is {{workshop_dns_zone}}"
+          - "You must have a valid route53 zone configured for scenario_dns_zone"
+          - "Right now the scenario_dns_zone is {{scenario_dns_zone}}"
 
 - name: Find available AZ for region {{ ec2_region }}
   amazon.aws.aws_az_info:

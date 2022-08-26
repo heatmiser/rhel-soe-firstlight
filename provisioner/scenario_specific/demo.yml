@@ -4,9 +4,9 @@
   gather_facts: false
   connection: local
   tasks:
-    - name: demo-mode workshop type
+    - name: demo-mode scenario type
       debug:
-        msg: "This workshop is demo mode! Including all workshop variants"
+        msg: "This scenario is demo mode! Including all scenario variants"
 
 - import_playbook: rhel.yml
 

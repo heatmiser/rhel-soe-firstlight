@@ -148,10 +148,10 @@
 # Add repository as project
 - name: Add git repository as Tower project
   awx.awx.project:
-    name: "Workshop Project"
+    name: "scenario Project"
     organization: "Default"
     scm_type: git
-    scm_url: "https://github.com/ansible-security/workshop-examples"
+    scm_url: "https://github.com/ansible-security/scenario-examples"
     controller_username: admin
     controller_password: "{{ admin_password }}"
     controller_host: "https://{{ ansible_host }}"
@@ -170,12 +170,12 @@
   awx.awx.job_template:
     name: "Send firewall logs to QRadar"
     job_type: "run"
-    inventory: "Workshop Inventory"
-    project: "Workshop Project"
+    inventory: "scenario Inventory"
+    project: "scenario Project"
     playbook: "cp_log.yml"
     state: "present"
     limit: "checkpoint"
-    execution_environment: "{{ workshop_type }} workshop execution environment"
+    execution_environment: "{{ scenario_type }} scenario execution environment"
     controller_username: admin
     controller_password: "{{ admin_password }}"
     controller_host: "https://{{ ansible_host }}"
@@ -186,14 +186,14 @@
   awx.awx.job_template:
     name: "Send IDPS logs to QRadar"
     job_type: "run"
-    inventory: "Workshop Inventory"
-    project: "Workshop Project"
+    inventory: "scenario Inventory"
+    project: "scenario Project"
     playbook: "idps_log.yml"
     state: "present"
     limit: "snort"
-    credential: "Workshop Credential"
+    credential: "scenario Credential"
     become_enabled: true
-    execution_environment: "{{ workshop_type }} workshop execution environment"
+    execution_environment: "{{ scenario_type }} scenario execution environment"
     controller_username: admin
     controller_password: "{{ admin_password }}"
     controller_host: "https://{{ ansible_host }}"
@@ -204,12 +204,12 @@
   awx.awx.job_template:
     name: "Accept firewall logs in QRadar"
     job_type: "run"
-    inventory: "Workshop Inventory"
-    project: "Workshop Project"
+    inventory: "scenario Inventory"
+    project: "scenario Project"
     playbook: "qradar_cp_log.yml"
     state: "present"
     limit: "qradar"
-    execution_environment: "{{ workshop_type }} workshop execution environment"
+    execution_environment: "{{ scenario_type }} scenario execution environment"
     controller_username: admin
     controller_password: "{{ admin_password }}"
     controller_host: "https://{{ ansible_host }}"
@@ -220,12 +220,12 @@
   awx.awx.job_template:
     name: "Accept IDPS logs in QRadar"
     job_type: "run"
-    inventory: "Workshop Inventory"
-    project: "Workshop Project"
+    inventory: "scenario Inventory"
+    project: "scenario Project"
     playbook: "qradar_snort_log.yml"
     state: "present"
     limit: "qradar"
-    execution_environment: "{{ workshop_type }} workshop execution environment"
+    execution_environment: "{{ scenario_type }} scenario execution environment"
     controller_username: admin
     controller_password: "{{ admin_password }}"
     controller_host: "https://{{ ansible_host }}"
@@ -236,12 +236,12 @@
   awx.awx.job_template:
     name: "Roll back all changes"
     job_type: "run"
-    inventory: "Workshop Inventory"
-    project: "Workshop Project"
+    inventory: "scenario Inventory"
+    project: "scenario Project"
     playbook: "rollback.yml"
     state: "present"
-    credential: "Workshop Credential"
-    execution_environment: "{{ workshop_type }} workshop execution environment"
+    credential: "scenario Credential"
+    execution_environment: "{{ scenario_type }} scenario execution environment"
     controller_username: admin
     controller_password: "{{ admin_password }}"
     controller_host: "https://{{ ansible_host }}"
@@ -252,16 +252,16 @@
   awx.awx.job_template:
     name: "Add IDPS rule"
     job_type: "run"
-    inventory: "Workshop Inventory"
-    project: "Workshop Project"
+    inventory: "scenario Inventory"
+    project: "scenario Project"
     playbook: "snort_rule.yml"
     state: "present"
     limit: "snort"
-    credential: "Workshop Credential"
+    credential: "scenario Credential"
     become_enabled: true
     survey_enabled: true
     survey_spec: "{{ lookup('template', 'security_survey_ids_rule.json') }}"
-    execution_environment: "{{ workshop_type }} workshop execution environment"
+    execution_environment: "{{ scenario_type }} scenario execution environment"
     controller_username: admin
     controller_password: "{{ admin_password }}"
     controller_host: "https://{{ ansible_host }}"
@@ -272,14 +272,14 @@
   awx.awx.job_template:
     name: "Start DDOS attack simulation"
     job_type: "run"
-    inventory: "Workshop Inventory"
-    project: "Workshop Project"
+    inventory: "scenario Inventory"
+    project: "scenario Project"
     playbook: "ddos_attack_simulation.yml"
     state: "present"
     limit: "attacker"
-    credential: "Workshop Credential"
+    credential: "scenario Credential"
     become_enabled: true
-    execution_environment: "{{ workshop_type }} workshop execution environment"
+    execution_environment: "{{ scenario_type }} scenario execution environment"
     controller_username: admin
     controller_password: "{{ admin_password }}"
     controller_host: "https://{{ ansible_host }}"
@@ -290,14 +290,14 @@
   awx.awx.job_template:
     name: "Stop DDOS attack simulation"
     job_type: "run"
-    inventory: "Workshop Inventory"
-    project: "Workshop Project"
+    inventory: "scenario Inventory"
+    project: "scenario Project"
     playbook: "ddos_stop_simulation.yml"
     state: "present"
     limit: "attacker"
-    credential: "Workshop Credential"
+    credential: "scenario Credential"
     become_enabled: true
-    execution_environment: "{{ workshop_type }} workshop execution environment"
+    execution_environment: "{{ scenario_type }} scenario execution environment"
     controller_username: admin
     controller_password: "{{ admin_password }}"
     controller_host: "https://{{ ansible_host }}"
@@ -308,12 +308,12 @@
   awx.awx.job_template:
     name: "Whitelist attacker"
     job_type: "run"
-    inventory: "Workshop Inventory"
-    project: "Workshop Project"
+    inventory: "scenario Inventory"
+    project: "scenario Project"
     playbook: "whitelist_attacker.yml"
     state: "present"
     limit: "checkpoint"
-    execution_environment: "{{ workshop_type }} workshop execution environment"
+    execution_environment: "{{ scenario_type }} scenario execution environment"
     controller_username: admin
     controller_password: "{{ admin_password }}"
     controller_host: "https://{{ ansible_host }}"
@@ -324,12 +324,12 @@
   awx.awx.job_template:
     name: "Blacklist attacker"
     job_type: "run"
-    inventory: "Workshop Inventory"
-    project: "Workshop Project"
+    inventory: "scenario Inventory"
+    project: "scenario Project"
     playbook: "blacklist_attacker.yml"
     state: "present"
     limit: "checkpoint"
-    execution_environment: "{{ workshop_type }} workshop execution environment"
+    execution_environment: "{{ scenario_type }} scenario execution environment"
     controller_username: admin
     controller_password: "{{ admin_password }}"
     controller_host: "https://{{ ansible_host }}"

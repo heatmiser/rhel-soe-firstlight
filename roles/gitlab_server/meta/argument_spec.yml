@@ -8,7 +8,7 @@ argument_specs:
         type: bool
         required: true
   add-users:
-    short_description: Add workshop users to the GitLab server.
+    short_description: Add scenario users to the GitLab server.
     options:
       admin_password:
         description: The GitLab admin password.
@@ -18,12 +18,12 @@ argument_specs:
         description: A prefix for EC2 and DNS resources.
         type: str
         required: true
-      workshop_dns_zone:
-        description: The base DNS zone for the workshop.
+      scenario_dns_zone:
+        description: The base DNS zone for the scenario.
         type: str
         required: true
       student_total:
-        description: The total number of students for the workshop.
+        description: The total number of students for the scenario.
         type: int
         required: true
   certbot:
@@ -33,8 +33,8 @@ argument_specs:
         description: A prefix for EC2 and DNS resources.
         type: str
         required: true
-      workshop_dns_zone:
-        description: The base DNS zone for the workshop.
+      scenario_dns_zone:
+        description: The base DNS zone for the scenario.
         type: str
         required: true
   dns:
@@ -47,8 +47,8 @@ argument_specs:
           - present
           - absent
         required: true
-      workshop_dns_zone:
-        description: The base DNS zone for the workshop.
+      scenario_dns_zone:
+        description: The base DNS zone for the scenario.
         type: str
         required: true
       ec2_name_prefix:
@@ -58,8 +58,8 @@ argument_specs:
   teardown:
     short_description: Tear down GitLab DNS entries.
     options:
-      workshop_dns_zone:
-        description: The base DNS zone for the workshop.
+      scenario_dns_zone:
+        description: The base DNS zone for the scenario.
         type: str
         required: true
       ec2_name_prefix:

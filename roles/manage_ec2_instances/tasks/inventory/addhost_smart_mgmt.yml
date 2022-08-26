@@ -1,5 +1,5 @@
 ---
-## re-use RHEL workshop code
+## re-use RHEL scenario code
 - name: add rhel hosts to inventory
   include_tasks: addhost_rhel.yml
 
@@ -16,7 +16,7 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_satellite": "{{ec2_name_prefix}}-satellite"
+      "tag:scenario_satellite": "{{ec2_name_prefix}}-satellite"
   register: satellite_node_facts
 
 - name: add satellite to group

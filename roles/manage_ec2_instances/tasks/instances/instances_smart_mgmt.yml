@@ -26,21 +26,21 @@
     state: running
     filters:
       instance-state-name: running
-      "tag:Workshop_satellite": "{{ ec2_name_prefix }}-satellite"
+      "tag:scenario_satellite": "{{ ec2_name_prefix }}-satellite"
     tags:
-      Workshop_satellite: "{{ ec2_name_prefix }}-satellite"
-      Workshop: "{{ ec2_name_prefix }}"
+      scenario_satellite: "{{ ec2_name_prefix }}-satellite"
+      scenario: "{{ ec2_name_prefix }}"
       uuid: "{{ ec2_name_prefix }}"
       guid: "{{ ec2_name_prefix }}"
-      Workshop_type: "{{ workshop_type }}"
+      scenario_type: "{{ scenario_type }}"
       AWS_USERNAME: "{{ aws_user }}"
       owner: "{{ aws_user }}"
       Info: "AWS_USERNAME that provisioned this-> {{ aws_user }}"
-      Ansible_Workshops: "This was provisioned through the ansible workshops provisioner"
+      Ansible_scenarios: "This was provisioned through the ansible scenarios provisioner"
       Students: "{{ student_total }}"
       short_name: "satellite"
       username: "{{ ec2_info[rhel].username }}"
-      ansible-workshops: "true"
+      ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
     vpc_subnet_id: "{{ ec2_vpc_subnet_id }}"
     volumes:
@@ -58,7 +58,7 @@
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:Workshop_satellite": "{{ ec2_name_prefix }}-satellite"
+      "tag:scenario_satellite": "{{ ec2_name_prefix }}-satellite"
   register: satellite_output
 
 - name: Ensure tags are present for satellite
@@ -75,7 +75,7 @@
     - "{{ satellite_output.instances }}"
   when: satellite_output.instances|length > 0
 
-## re-use RHEL workshop code
+## re-use RHEL scenario code
 - name: provision aws rhel instances
   include_tasks: instances_rhel.yml
 

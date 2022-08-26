@@ -11,5 +11,5 @@ Example:
   gather_facts: false
   tasks:
     - include_role:
-        name: ansible.workshops.connectivity_test
+        name: ansible.scenarios.connectivity_test
 ```

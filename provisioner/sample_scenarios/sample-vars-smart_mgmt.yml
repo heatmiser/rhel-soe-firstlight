@@ -2,11 +2,11 @@
 # region where the nodes will live
 ec2_region: us-east-1
 # name prefix for all the VMs
-ec2_name_prefix: TESTWORKSHOP
+ec2_name_prefix: TESTscenario
 # amount of work benches to provision
 student_total: 2
-# workshop is put into rhel mode
-workshop_type: smart_mgmt
+# scenario is put into rhel mode
+scenario_type: smart_mgmt
 # define DNS zone. AWS DNS required
 dns_type: aws
 # password used for student account on control node
@@ -17,7 +17,7 @@ offline_token: "234234234234234234234234234234234234234"
 redhat_username: joe@redhat.com
 redhat_password: R3dh4t!
 # DNS domain
-workshop_dns_zone: demoredhat.com
+scenario_dns_zone: demoredhat.com
 ## Optional Variables
 # select rhel7 or rhel8 client nodes
 rhel: rhel7
@@ -26,5 +26,5 @@ controllerinstall: true
 # this will install VS Code web on all control nodes
 code_server: true
 # this will change the location of lab guide
-# ansible_workshops_url: https://github.com/ansible/workshops
-# ansible_workshops_version: smart_mgmt
+# ansible_scenarios_url: https://github.com/ansible/scenarios
+# ansible_scenarios_version: smart_mgmt
