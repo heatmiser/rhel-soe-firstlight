@@ -75,16 +75,21 @@
     - "{{ satellite_output.instances }}"
   when: satellite_output.instances|length > 0
 
-## re-use RHEL scenario code
-- name: provision aws rhel instances
-  include_tasks: instances_rhel.yml
+- name: provision aws rhel 7 instances
+  include_tasks: instances_rhel_7.yml
+
+- name: provision aws rhel 8 instances
+  include_tasks: instances_rhel_8.yml
+
+- name: provision aws rhel 9 instances
+  include_tasks: instances_rhel_9.yml
 
 ## centos 6 nodes for potential convert2rhel scenarios
-- name: provision aws centos 6 instances
-  include_tasks: instances_centos_6.yml
-  when: (centos6 is defined) and (centos6 is not none)
+#- name: provision aws centos 6 instances
+#  include_tasks: instances_centos_6.yml
+#  when: (centos6 is defined) and (centos6 is not none)
 
 ## centos 7 nodes for potential convert2rhel scenarios
-- name: provision aws centos 7 instances
-  include_tasks: instances_centos_7.yml
-  when: (centos7 is defined) and (centos7 is not none)
+#- name: provision aws centos 7 instances
+#  include_tasks: instances_centos_7.yml
+#  when: (centos7 is defined) and (centos7 is not none)

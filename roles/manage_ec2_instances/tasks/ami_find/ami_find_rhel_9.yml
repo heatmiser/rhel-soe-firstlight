@@ -10,5 +10,5 @@
 
 - name: save ami for rhel9 nodes
   set_fact:
-    node_ami_rhel: >
+    node_ami_rhel_9: >
       {{ amis.images | selectattr('name', 'defined') | sort(attribute='name') | last }}
