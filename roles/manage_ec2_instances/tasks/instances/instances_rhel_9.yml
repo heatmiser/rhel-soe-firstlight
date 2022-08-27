@@ -1,5 +1,5 @@
 ---
-- name: Create EC2 instances for node1
+- name: Create EC2 instances for node7
   amazon.aws.ec2_instance:
     state: running
     network:
@@ -12,9 +12,9 @@
     exact_count: "{{ student_total }}"
     filters:
       instance-state-name: running
-      "tag:scenario_node1": "{{ ec2_name_prefix }}-node1"
+      "tag:scenario_node7": "{{ ec2_name_prefix }}-node7"
     tags:
-      scenario_node1: "{{ ec2_name_prefix }}-node1"
+      scenario_node7: "{{ ec2_name_prefix }}-node7"
       scenario: "{{ ec2_name_prefix }}"
       uuid: "{{ ec2_name_prefix }}"
       guid: "{{ ec2_name_prefix }}"
@@ -24,7 +24,7 @@
       Info: "AWS_USERNAME that provisioned this-> {{ aws_user }}"
       Linklight: "This was provisioned through the linklight provisioner"
       Students: "{{ student_total }}"
-      short_name: "node1"
+      short_name: "node7"
       username: "{{ ec2_info[rhel].username }}"
       ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
@@ -42,29 +42,29 @@
 - debug:
     msg: "{{ sean_test }}"
 
-- name: grab instance ids to tag node1
+- name: grab instance ids to tag node7
   amazon.aws.ec2_instance_info:
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:scenario_node1": "{{ ec2_name_prefix }}-node1"
-  register: node1_output
+      "tag:scenario_node7": "{{ ec2_name_prefix }}-node7"
+  register: node7_output
 
-- name: Ensure tags are present for node1
+- name: Ensure tags are present for node7
   amazon.aws.ec2_tag:
     region: "{{ ec2_region }}"
     resource: "{{ item.1.instance_id }}"
     state: present
     tags:
-      Name: "{{ ec2_name_prefix }}-student{{ item.0 + 1 }}-node1"
+      Name: "{{ ec2_name_prefix }}-student{{ item.0 + 1 }}-node7"
       Index: "{{ item[0] }}"
       Student: "student{{ item.0 + 1 }}"
       launch_time: "{{ item.1.launch_time }}"
   with_indexed_items:
-    - "{{ node1_output.instances }}"
-  when: node1_output.instances|length > 0
+    - "{{ node7_output.instances }}"
+  when: node7_output.instances|length > 0
 
-- name: Associate IAM instance profile with node1
+- name: Associate IAM instance profile with node7
   amazon.aws.ec2_instance:
     instance_ids: "{{ item.1.instance_id }}"
     region: "{{ ec2_region }}"
@@ -72,16 +72,16 @@
     state: running
     wait: true
   with_indexed_items:
-    - "{{ node1_output.instances }}"
+    - "{{ node7_output.instances }}"
   register: associate_iam_instance_profile
   until: associate_iam_instance_profile is not failed
   retries: 12
   delay: 10
   when:
-    - node1_output.instances|length > 0
+    - node7_output.instances|length > 0
     - tower_node_aws_api_access|default(false)|bool
 
-- name: Create EC2 instances for node2
+- name: Create EC2 instances for node8
   amazon.aws.ec2_instance:
     state: running
     network:
@@ -94,9 +94,9 @@
     exact_count: "{{ student_total }}"
     filters:
       instance-state-name: running
-      "tag:scenario_node2": "{{ ec2_name_prefix }}-node2"
+      "tag:scenario_node8": "{{ ec2_name_prefix }}-node8"
     tags:
-      scenario_node2: "{{ ec2_name_prefix }}-node2"
+      scenario_node8: "{{ ec2_name_prefix }}-node8"
       scenario: "{{ ec2_name_prefix }}"
       uuid: "{{ ec2_name_prefix }}"
       guid: "{{ ec2_name_prefix }}"
@@ -106,7 +106,7 @@
       Info: "AWS_USERNAME that provisioned this-> {{ aws_user }}"
       Linklight: "This was provisioned through the linklight provisioner"
       Students: "{{ student_total }}"
-      short_name: "node2"
+      short_name: "node8"
       username: "{{ ec2_info[rhel].username }}"
       ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
@@ -120,29 +120,29 @@
           throughput: "{{ ec2_info[rhel].disk_throughput }}"
           delete_on_termination: true
 
-- name: grab instance ids to tag node2
+- name: grab instance ids to tag node8
   amazon.aws.ec2_instance_info:
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:scenario_node2": "{{ ec2_name_prefix }}-node2"
-  register: node2_output
+      "tag:scenario_node8": "{{ ec2_name_prefix }}-node8"
+  register: node8_output
 
-- name: Ensure tags are present for node2
+- name: Ensure tags are present for node8
   amazon.aws.ec2_tag:
     region: "{{ ec2_region }}"
     resource: "{{ item.1.instance_id }}"
     state: present
     tags:
-      Name: "{{ ec2_name_prefix }}-student{{ item.0 + 1 }}-node2"
+      Name: "{{ ec2_name_prefix }}-student{{ item.0 + 1 }}-node8"
       Index: "{{ item[0] }}"
       Student: "student{{ item.0 + 1 }}"
       launch_time: "{{ item.1.launch_time }}"
   with_indexed_items:
-    - "{{ node2_output.instances }}"
-  when: node2_output.instances|length > 0
+    - "{{ node8_output.instances }}"
+  when: node8_output.instances|length > 0
 
-- name: Associate IAM instance profile with node2
+- name: Associate IAM instance profile with node8
   amazon.aws.ec2_instance:
     instance_ids: "{{ item.1.instance_id }}"
     region: "{{ ec2_region }}"
@@ -150,16 +150,16 @@
     state: running
     wait: true
   with_indexed_items:
-    - "{{ node2_output.instances }}"
+    - "{{ node8_output.instances }}"
   register: associate_iam_instance_profile
   until: associate_iam_instance_profile is not failed
   retries: 12
   delay: 10
   when:
-    - node2_output.instances|length > 0
+    - node8_output.instances|length > 0
     - tower_node_aws_api_access|default(false)|bool
 
-- name: Create EC2 instances for node3
+- name: Create EC2 instances for node9
   amazon.aws.ec2_instance:
     state: running
     network:
@@ -172,9 +172,9 @@
     exact_count: "{{ student_total }}"
     filters:
       instance-state-name: running
-      "tag:scenario_node3": "{{ ec2_name_prefix }}-node3"
+      "tag:scenario_node9": "{{ ec2_name_prefix }}-node9"
     tags:
-      scenario_node3: "{{ ec2_name_prefix }}-node3"
+      scenario_node9: "{{ ec2_name_prefix }}-node9"
       scenario: "{{ ec2_name_prefix }}"
       uuid: "{{ ec2_name_prefix }}"
       guid: "{{ ec2_name_prefix }}"
@@ -184,7 +184,7 @@
       Info: "AWS_USERNAME that provisioned this-> {{ aws_user }}"
       Linklight: "This was provisioned through the linklight provisioner"
       Students: "{{ student_total }}"
-      short_name: "node3"
+      short_name: "node9"
       username: "{{ ec2_info[rhel].username }}"
       ansible-scenarios: "true"
     wait: "{{ ec2_wait }}"
@@ -198,29 +198,29 @@
           throughput: "{{ ec2_info[rhel].disk_throughput }}"
           delete_on_termination: true
 
-- name: grab instance ids to tag node3
+- name: grab instance ids to tag node9
   amazon.aws.ec2_instance_info:
     region: "{{ ec2_region }}"
     filters:
       instance-state-name: running
-      "tag:scenario_node3": "{{ ec2_name_prefix }}-node3"
-  register: node3_output
+      "tag:scenario_node9": "{{ ec2_name_prefix }}-node9"
+  register: node9_output
 
-- name: Ensure tags are present for node3
+- name: Ensure tags are present for node9
   amazon.aws.ec2_tag:
     region: "{{ ec2_region }}"
     resource: "{{ item.1.instance_id }}"
     state: present
     tags:
-      Name: "{{ ec2_name_prefix }}-student{{ item.0 + 1 }}-node3"
+      Name: "{{ ec2_name_prefix }}-student{{ item.0 + 1 }}-node9"
       Index: "{{ item[0] }}"
       Student: "student{{ item.0 + 1 }}"
       launch_time: "{{ item.1.launch_time }}"
   with_indexed_items:
-    - "{{ node3_output.instances }}"
-  when: node3_output.instances|length > 0
+    - "{{ node9_output.instances }}"
+  when: node9_output.instances|length > 0
 
-- name: Associate IAM instance profile with node3
+- name: Associate IAM instance profile with node9
   amazon.aws.ec2_instance:
     instance_ids: "{{ item.1.instance_id }}"
     region: "{{ ec2_region }}"
@@ -228,13 +228,13 @@
     state: running
     wait: true
   with_indexed_items:
-    - "{{ node3_output.instances }}"
+    - "{{ node9_output.instances }}"
   register: associate_iam_instance_profile
   until: associate_iam_instance_profile is not failed
   retries: 12
   delay: 10
   when:
-    - node3_output.instances|length > 0
+    - node9_output.instances|length > 0
     - tower_node_aws_api_access|default(false)|bool
 
 # Create isolated/remote node for Adv Tower lab when cluster install
