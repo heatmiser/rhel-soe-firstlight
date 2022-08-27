@@ -1,12 +1,12 @@
 ---
 - name: add rhel 7 hosts to inventory
-  include_tasks: ./addhost_rhel_7.yml
+  include_tasks: addhost_rhel_7.yml
 
 - name: add rhel 8 hosts to inventory
-  include_tasks: ./addhost_rhel_8.yml
+  include_tasks: addhost_rhel_8.yml
 
 - name: add rhel 9 hosts to inventory
-  include_tasks: ./addhost_rhel_9.yml
+  include_tasks: addhost_rhel_9.yml
 
 #- name: add centos 6 hosts to inventory
 #  include_tasks: addhost_centos_6.yml
