@@ -1,15 +1,20 @@
 ---
-## re-use RHEL scenario code
-- name: add rhel hosts to inventory
-  include_tasks: addhost_rhel.yml
+- name: add rhel 7 hosts to inventory
+  include_tasks: addhost_rhel_7.yml
 
-- name: add centos 6 hosts to inventory
-  include_tasks: addhost_centos_6.yml
-  when: (centos6 is defined) and (centos6 is not none)
+- name: add rhel 8 hosts to inventory
+  include_tasks: addhost_rhel_8.yml
 
-- name: add centos 7 hosts to inventory
-  include_tasks: addhost_centos_7.yml
-  when: (centos7 is defined) and (centos7 is not none)
+- name: add rhel 9 hosts to inventory
+  include_tasks: addhost_rhel_9.yml
+
+#- name: add centos 6 hosts to inventory
+#  include_tasks: addhost_centos_6.yml
+#  when: (centos6 is defined) and (centos6 is not none)
+
+#- name: add centos 7 hosts to inventory
+#  include_tasks: addhost_centos_7.yml
+#  when: (centos7 is defined) and (centos7 is not none)
 
 - name: grab facts for satellite node
   amazon.aws.ec2_instance_info:
