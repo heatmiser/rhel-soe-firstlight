@@ -155,7 +155,7 @@
 
   tasks:
 
-    - when: provision_mode == "scenario"
+    - when: provision_mode == "workshop"
       block:
         - name: Run SETUP / Satellite job template
           awx.awx.job_launch:
