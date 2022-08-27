@@ -1,0 +1,5 @@
+{% for vm in ansible_node_facts.instances %}
+{% if 'student' + item == vm.tags.Student %}
+{{ vm.private_ip_address }} {{ vm.tags.short_name }}.example.com {{ vm.tags.short_name }} {{vm.tags.Student}}.{{ec2_name_prefix|lower}}.{{scenario_dns_zone}}
+{% endif %}
+{% endfor %}
