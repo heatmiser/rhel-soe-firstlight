@@ -75,7 +75,6 @@ ansible_port={{ ssh_port }}
 [{{ rhel7 }}:vars]
 ansible_user=ec2-user
 
-{% endif %}
 [control]
 {% for vm in ansible_node_facts.instances -%}
 {% if 'student' + item == vm.tags.Student -%}
