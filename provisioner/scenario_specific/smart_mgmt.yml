@@ -127,7 +127,7 @@
         inventory: scenario Inventory
         credentials:
           - Satellite Credential
-          - scenario Credential
+          - SOE Credential
         extra_vars:
           refresh_satellite_manifest: false
         ask_variables_on_launch: true
