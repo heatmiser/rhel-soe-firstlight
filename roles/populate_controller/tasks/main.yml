@@ -139,7 +139,7 @@
 # scenario specific execution environments
 - name: Add specific scenario execution environment
   awx.awx.execution_environment:
-    name: "{{ scenario_type }} scenario execution environment"
+    name: "{{ scenario_type }} execution environment"
     image: "{{ lookup('vars', scenario_type + '_ee') }}"
     pull: missing
     controller_username: admin

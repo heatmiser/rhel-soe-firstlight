@@ -175,7 +175,7 @@
     playbook: "cp_log.yml"
     state: "present"
     limit: "checkpoint"
-    execution_environment: "{{ scenario_type }} scenario execution environment"
+    execution_environment: "{{ scenario_type }} execution environment"
     controller_username: admin
     controller_password: "{{ admin_password }}"
     controller_host: "https://{{ ansible_host }}"
@@ -193,7 +193,7 @@
     limit: "snort"
     credential: "scenario Credential"
     become_enabled: true
-    execution_environment: "{{ scenario_type }} scenario execution environment"
+    execution_environment: "{{ scenario_type }} execution environment"
     controller_username: admin
     controller_password: "{{ admin_password }}"
     controller_host: "https://{{ ansible_host }}"
@@ -209,7 +209,7 @@
     playbook: "qradar_cp_log.yml"
     state: "present"
     limit: "qradar"
-    execution_environment: "{{ scenario_type }} scenario execution environment"
+    execution_environment: "{{ scenario_type }} execution environment"
     controller_username: admin
     controller_password: "{{ admin_password }}"
     controller_host: "https://{{ ansible_host }}"
@@ -225,7 +225,7 @@
     playbook: "qradar_snort_log.yml"
     state: "present"
     limit: "qradar"
-    execution_environment: "{{ scenario_type }} scenario execution environment"
+    execution_environment: "{{ scenario_type }} execution environment"
     controller_username: admin
     controller_password: "{{ admin_password }}"
     controller_host: "https://{{ ansible_host }}"
@@ -241,7 +241,7 @@
     playbook: "rollback.yml"
     state: "present"
     credential: "scenario Credential"
-    execution_environment: "{{ scenario_type }} scenario execution environment"
+    execution_environment: "{{ scenario_type }} execution environment"
     controller_username: admin
     controller_password: "{{ admin_password }}"
     controller_host: "https://{{ ansible_host }}"
@@ -261,7 +261,7 @@
     become_enabled: true
     survey_enabled: true
     survey_spec: "{{ lookup('template', 'security_survey_ids_rule.json') }}"
-    execution_environment: "{{ scenario_type }} scenario execution environment"
+    execution_environment: "{{ scenario_type }} execution environment"
     controller_username: admin
     controller_password: "{{ admin_password }}"
     controller_host: "https://{{ ansible_host }}"
@@ -279,7 +279,7 @@
     limit: "attacker"
     credential: "scenario Credential"
     become_enabled: true
-    execution_environment: "{{ scenario_type }} scenario execution environment"
+    execution_environment: "{{ scenario_type }} execution environment"
     controller_username: admin
     controller_password: "{{ admin_password }}"
     controller_host: "https://{{ ansible_host }}"
@@ -297,7 +297,7 @@
     limit: "attacker"
     credential: "scenario Credential"
     become_enabled: true
-    execution_environment: "{{ scenario_type }} scenario execution environment"
+    execution_environment: "{{ scenario_type }} execution environment"
     controller_username: admin
     controller_password: "{{ admin_password }}"
     controller_host: "https://{{ ansible_host }}"
@@ -313,7 +313,7 @@
     playbook: "whitelist_attacker.yml"
     state: "present"
     limit: "checkpoint"
-    execution_environment: "{{ scenario_type }} scenario execution environment"
+    execution_environment: "{{ scenario_type }} execution environment"
     controller_username: admin
     controller_password: "{{ admin_password }}"
     controller_host: "https://{{ ansible_host }}"
@@ -329,7 +329,7 @@
     playbook: "blacklist_attacker.yml"
     state: "present"
     limit: "checkpoint"
-    execution_environment: "{{ scenario_type }} scenario execution environment"
+    execution_environment: "{{ scenario_type }} execution environment"
     controller_username: admin
     controller_password: "{{ admin_password }}"
     controller_host: "https://{{ ansible_host }}"

@@ -15,7 +15,7 @@ controller_templates:
     playbook: "playbooks/security/hardening.yml"
     credential: "scenario Credential"
     survey_enabled: true
-    execution_environment: "rhel_90 scenario execution environment"
+    execution_environment: "rhel_90 execution environment"
     survey:
       name: Hardening survey
       description: Configure firewall, time, SSH and PCI baseline

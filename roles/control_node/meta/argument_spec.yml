@@ -5,31 +5,31 @@ argument_specs:
     options:
       f5_ee:
         type: str
-        description: f5 scenario execution environment
+        description: f5 execution environment
         default: "quay.io/acme_corp/f5_ee:latest"
       security_ee:
         type: str
-        description: security scenario execution environment
+        description: security execution environment
         default: "quay.io/acme_corp/security_ee:latest"
       rhel_ee:
         type: str
-        description: rhel scenario execution environment
+        description: rhel execution environment
         default: "registry.redhat.io/ansible-automation-platform-20-early-access/ee-supported-rhel8:2.0.0"
       network_ee:
         type: str
-        description: network scenario execution environment
+        description: network execution environment
         default: "registry.redhat.io/ansible-automation-platform-20-early-access/ee-supported-rhel8:2.0.0"
       rhel_90_ee:
         type: str
-        description: rhel_90 scenario execution environment
+        description: rhel_90 execution environment
         default: "quay.io/acme_corp/rhel_90_ee:latest"
       windows_ee:
         type: str
-        description: windows scenario execution environment
+        description: windows execution environment
         default: "quay.io/acme_corp/windows_ee:latest"
       smart_mgmt_ee:
         type: str
-        description: smart_mgmt scenario execution environment
+        description: smart_mgmt execution environment
         default: "quay.io/s4v0/ee-automated-smart-mgmt-29:latest"
       username:
         description: The scenario username.

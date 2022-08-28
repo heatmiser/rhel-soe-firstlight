@@ -115,7 +115,7 @@
         scm_type: git
         scm_url: 'https://github.com/heatmiser/rhel-soe-2022.git'
         scm_branch: main
-        default_environment: smart_mgmt scenario execution environment
+        default_environment: smart_mgmt execution environment
       - name: Fact Scan
         organization: Default
         scm_type: git

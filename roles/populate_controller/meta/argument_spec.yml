@@ -32,7 +32,7 @@ argument_specs:
         required: true
       f5_ee:
         type: str
-        description: f5 scenario execution environment
+        description: f5 execution environment
         default: "quay.io/acme_corp/f5_ee:latest"
   network:
     short_description: Tower configuration for the network scenario.
@@ -43,7 +43,7 @@ argument_specs:
         required: true
       network_ee:
         type: str
-        description: network scenario execution environment
+        description: network execution environment
         default: "registry.redhat.io/ansible-automation-platform-20-early-access/ee-supported-rhel8:2.0.0"
   rhel:
     short_description: Tower configuration for the RHEL scenario.
@@ -54,7 +54,7 @@ argument_specs:
         required: true
       rhel_ee:
         type: str
-        description: rhel scenario execution environment
+        description: rhel execution environment
         default: "registry.redhat.io/ansible-automation-platform-20-early-access/ee-supported-rhel8:2.0.0"
   rhel_90:
     short_description: Tower configuration for the RHEL 90min scenario.
@@ -65,7 +65,7 @@ argument_specs:
         required: true
       rhel_90_ee:
         type: str
-        description: rhel_90 scenario execution environment
+        description: rhel_90 execution environment
         default: "quay.io/acme_corp /rhel_90_ee:latest"
   security:
     short_description: Tower configuration for the security scenario.
@@ -88,7 +88,7 @@ argument_specs:
         required: true
       security_ee:
         type: str
-        description: security scenario execution environment
+        description: security execution environment
         default: "quay.io/acme_corp/security_ee:latest"
   unsupported_scenario:
     short_description: Catch-all for unsupported scenario types.
@@ -118,5 +118,28 @@ argument_specs:
         required: true
       windows_ee:
         type: str
-        description: windows scenario execution environment
+        description: windows execution environment
         default: "registry.redhat.io/ansible-automation-platform-20-early-access/ee-supported-rhel8:2.0.0"
+  smart_mgmt:
+    short_description: Tower configuration for the smart_mgmt scenario.
+    options:
+      admin_password:
+        description: The Ansible Tower admin password.
+        type: str
+        required: true
+      username:
+        description: The scenario username.
+        type: str
+        required: true
+      ec2_name_prefix:
+        description: A prefix for EC2 and DNS resources.
+        type: str
+        required: true
+      scenario_dns_zone:
+        description: The base DNS zone for the scenario.
+        type: str
+        required: true
+      windows_ee:
+        type: str
+        description: smart_mgmt execution environment
+        default: "quay.io/s4v0/ee-automated-smart-mgmt-29:latest"
