@@ -34,16 +34,6 @@
     refspec: '{{ ansible_scenarios_refspec | default("") }}'
     force: true
 
-- name: Move relevant exercises to correct location
-  copy:
-    src: '{{ "/tmp/scenarios/" + exercise_src_location | default("exercises/ansible_" + scenario_type) + "/" }}'
-    dest: '{{ "/home/" + username + "/" + exercise_dest_location | default(scenario_type + "-scenario") }}'
-    remote_src: true
-    owner: "{{ username }}"
-    group: "{{ username }}"
-    local_follow: true
-  ignore_errors: true  # Required for testing local development
-
 - name: Create lab inventory directory
   file:
     state: directory
