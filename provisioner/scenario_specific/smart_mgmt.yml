@@ -123,7 +123,7 @@
     controller_templates:
       - name: SETUP / Satellite
         project: Automated Management
-        playbook: setup_satellite.yml
+        playbook: playbooks/setup_satellite.yml
         inventory: scenario Inventory
         credentials:
           - Satellite Credential
@@ -133,7 +133,7 @@
         ask_variables_on_launch: true
       - name: SETUP / Controller
         project: Automated Management
-        playbook: setup_controller.yml
+        playbook: playbooks/setup_controller.yml
         inventory: scenario Inventory
         credentials:
           - Controller Credential
