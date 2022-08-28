@@ -71,7 +71,7 @@
 
 - name: import inventory
   become_user: awx
-  shell: 'tower-manage inventory_import --source=/var/lib/awx/hosts --inventory-name="scenario Inventory"'
+  shell: 'tower-manage inventory_import --source=/var/lib/awx/hosts --inventory-name="SOE Inventory"'
   register: import_inventory
   until: import_inventory is not failed
   retries: 5
