@@ -124,7 +124,7 @@
       - name: SETUP / Satellite
         project: Automated Management
         playbook: playbooks/setup_satellite.yml
-        inventory: scenario Inventory
+        inventory: SOE Inventory
         credentials:
           - Satellite Credential
           - SOE Credential
@@ -134,7 +134,7 @@
       - name: SETUP / Controller
         project: Automated Management
         playbook: playbooks/setup_controller.yml
-        inventory: scenario Inventory
+        inventory: SOE Inventory
         credentials:
           - Controller Credential
 
