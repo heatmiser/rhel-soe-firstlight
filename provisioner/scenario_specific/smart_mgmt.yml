@@ -113,8 +113,8 @@
         scm_update_on_launch: true
         scm_update_cache_timeout: 3600
         scm_type: git
-        scm_url: 'https://github.com/redhat-partner-tech/automated-smart-management.git'
-        scm_branch: aap2-29compat
+        scm_url: 'https://github.com/heatmiser/rhel-soe-2022.git'
+        scm_branch: main
         default_environment: smart_mgmt scenario execution environment
       - name: Fact Scan
         organization: Default
