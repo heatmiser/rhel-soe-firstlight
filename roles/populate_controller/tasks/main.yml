@@ -21,7 +21,7 @@
 #### CREDENTIAL
 - name: add SSH credential into Automation controller
   awx.awx.credential:
-    name: "scenario Credential"
+    name: "SOE Credential"
     credential_type: Machine
     organization: "Default"
     controller_username: admin
