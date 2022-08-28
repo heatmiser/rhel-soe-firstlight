@@ -48,16 +48,16 @@
 #### END OF CREDENTIAL
 
 #### Inventory
-- name: create scenario inventory
+- name: create SOE inventory
   awx.awx.inventory:
-    name: "scenario Inventory"
+    name: "SOE Inventory"
     organization: "Default"
     controller_username: admin
     controller_password: "{{ admin_password }}"
     controller_host: "https://{{ ansible_host }}"
     validate_certs: false
-  register: scenario_inventory
-  until: scenario_inventory is success
+  register: soe_inventory
+  until: soe_inventory is success
   delay: 3
   retries: 5
 
