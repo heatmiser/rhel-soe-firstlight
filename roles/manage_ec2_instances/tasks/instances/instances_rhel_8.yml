@@ -56,9 +56,9 @@
     resource: "{{ item.1.instance_id }}"
     state: present
     tags:
-      Name: "{{ ec2_name_prefix }}-student{{ item.0 + 1 }}-node4"
+      Name: "{{ ec2_name_prefix }}-{{ student_user }}{{ item.0 + 1 }}-node4"
       Index: "{{ item[0] }}"
-      Student: "student{{ item.0 + 1 }}"
+      Student: "{{ student_user }}{{ item.0 + 1 }}"
       launch_time: "{{ item.1.launch_time }}"
   with_indexed_items:
     - "{{ node4_output.instances }}"
@@ -134,9 +134,9 @@
     resource: "{{ item.1.instance_id }}"
     state: present
     tags:
-      Name: "{{ ec2_name_prefix }}-student{{ item.0 + 1 }}-node5"
+      Name: "{{ ec2_name_prefix }}-{{ student_user }}{{ item.0 + 1 }}-node5"
       Index: "{{ item[0] }}"
-      Student: "student{{ item.0 + 1 }}"
+      Student: "{{ student_user }}{{ item.0 + 1 }}"
       launch_time: "{{ item.1.launch_time }}"
   with_indexed_items:
     - "{{ node5_output.instances }}"
@@ -212,9 +212,9 @@
     resource: "{{ item.1.instance_id }}"
     state: present
     tags:
-      Name: "{{ ec2_name_prefix }}-student{{ item.0 + 1 }}-node6"
+      Name: "{{ ec2_name_prefix }}-{{ student_user }}{{ item.0 + 1 }}-node6"
       Index: "{{ item[0] }}"
-      Student: "student{{ item.0 + 1 }}"
+      Student: "{{ student_user }}{{ item.0 + 1 }}"
       launch_time: "{{ item.1.launch_time }}"
   with_indexed_items:
     - "{{ node6_output.instances }}"
