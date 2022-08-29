@@ -142,4 +142,4 @@ argument_specs:
       windows_ee:
         type: str
         description: smart_mgmt execution environment
-        default: "quay.io/s4v0/ee-automated-smart-mgmt-29:latest"
+        default: "quay.io/s4v0/ee-automated-smart-mgmt-29dev:latest"
