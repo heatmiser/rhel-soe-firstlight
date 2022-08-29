@@ -26,16 +26,16 @@
   include_tasks: "inventory/addhost_{{scenario_type}}.yml"
 
 ################### Write inventories ##################
-- name: Generate student inventories
+- name: "Generate {{ student_user }} inventories"
   template:
     src: "student_inventory/instances_{{scenario_type}}.j2"
-    dest: "{{ playbook_dir }}/{{ec2_name_prefix}}/student{{item}}-instances.txt"
+    dest: "{{ playbook_dir }}/{{ec2_name_prefix}}/{{ student_user }}{{item}}-instances.txt"
   with_sequence: count="{{ student_total }}"
 
-- name: Generate student etchosts
+- name: "Generate {{ student_user }} etchosts"
   template:
     src: "etchosts/etchosts_{{scenario_type}}.j2"
-    dest: "{{ playbook_dir }}/{{ec2_name_prefix}}/student{{item}}-etchosts.txt"
+    dest: "{{ playbook_dir }}/{{ec2_name_prefix}}/{{ student_user }}{{item}}-etchosts.txt"
   with_sequence: count="{{ student_total }}"
 
 - name: Generate instructor inventory
