@@ -1,3 +1,4 @@
+
 {% for vm in node1_node_facts.instances %}
 {% if student_user + item == vm.tags.Student %}
 {{ vm.private_ip_address }} {{ vm.tags.short_name }}.example.com {{ vm.tags.short_name }}
