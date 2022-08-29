@@ -1,6 +1,6 @@
 ---
 scenario_version: aug11-2022
-student_user: student
+student_user: soe
 admin_password: ansible
 code_server: true
 scenario_dns_zone: "rhdemo.io"
