@@ -11,6 +11,30 @@
     owner: "{{ username }}"
     group: "{{ username }}"
 
+- name: make sure .ssh is created
+  file:
+    path: "/home/{{ username }}/.ssh/"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    state: directory
+
+- name: add custom bashrc for student
+  template:
+    src: bashrc.j2
+    dest: /home/{{ username }}/.bashrc
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0644
+
+- name: "copy over ssh config file for {{ username }}"
+  template:
+    src: sshconfig.j2
+    dest: /home/{{ username }}/.ssh/config
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0700
+
+
 - name: Put ssh-key in proper spot for student
   copy:
     src: "{{ output_dir }}/{{ ec2_name_prefix }}-private.pem"
