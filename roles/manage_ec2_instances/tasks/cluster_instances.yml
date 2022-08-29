@@ -51,10 +51,10 @@
     resource: "{{ item.1.instance_id }}"
     state: present
     tags:
-      Name: "{{ ec2_name_prefix }}-student{{ item.0 + 1 }}-ansible-{{ sequence }}"
+      Name: "{{ ec2_name_prefix }}-{{ student_user }}{{ item.0 + 1 }}-ansible-{{ sequence }}"
       Index: "{{ item[0] }}"
-      Student: "student{{ item.0 + 1 }}"
-      dns: "{% if dns_type != 'none' %}student{{ item.0 + 1 }}.{{ ec2_name_prefix|lower }}.{{ scenario_dns_zone }} {% else %} none {% endif %}"
+      Student: "{{ student_user }}{{ item.0 + 1 }}"
+      dns: "{% if dns_type != 'none' %}{{ student_user }}{{ item.0 + 1 }}.{{ ec2_name_prefix|lower }}.{{ scenario_dns_zone }} {% else %} none {% endif %}"
       launch_time: "{{ item.1.launch_time }}"
   with_indexed_items:
     - "{{ control_output.instances }}"
