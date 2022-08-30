@@ -264,7 +264,7 @@
             extra_vars:
               content_view: RHEL7
               current_lifecycle_environment: RHEL7_Dev
-              lifecycle_environment: RHEL7_QA
+              lifecycle_environment: RHEL7_Test
             controller_username: admin
             controller_password: "{{ admin_password }}"
             controller_host: "https://{{ student }}.{{ ec2_name_prefix }}.{{ scenario_dns_zone }}"
