@@ -155,20 +155,20 @@
 
   tasks:
     - when: provision_mode == "empty"
-        block:
-          - name: set facts for output
-            set_fact:
-              host_information: |
-                PROVISIONER HOSTNAMES
-                *******************
-                - Scenario name is {{ ec2_name_prefix }}
-                - Controller: "{{ student_user }}1.{{ec2_name_prefix|lower}}.{{scenario_dns_zone}}"
-                - Satellite:  "{{ student_user }}1-sat.{{ec2_name_prefix|lower}}.{{scenario_dns_zone}}"
-                - Private key is located at {{ playbook_dir }}/{{ ec2_name_prefix }}/{{ ec2_name_prefix }}-private.pem
+      block:
+        - name: set facts for output
+          set_fact:
+            host_information: |
+              PROVISIONER HOSTNAMES
+              *******************
+              - Scenario name is {{ ec2_name_prefix }}
+              - Controller: "{{ student_user }}1.{{ec2_name_prefix|lower}}.{{scenario_dns_zone}}"
+              - Satellite:  "{{ student_user }}1-sat.{{ec2_name_prefix|lower}}.{{scenario_dns_zone}}"
+              - Private key is located at {{ playbook_dir }}/{{ ec2_name_prefix }}/{{ ec2_name_prefix }}-private.pem
 
-          - name: Print Host Information
-            debug:
-              msg: "{{ host_information }}"
+        - name: Print Host Information
+          debug:
+            msg: "{{ host_information }}"
 
     - when: provision_mode == "workshop"
       block:
