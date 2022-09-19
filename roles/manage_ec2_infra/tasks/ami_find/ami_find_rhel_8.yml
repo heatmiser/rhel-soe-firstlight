@@ -1,0 +1,14 @@
+---
+- name: find ami for rhel8 nodes
+  ec2_ami_info:
+    region: "{{ ec2_region }}"
+    owners: "{{ ec2_info[rhel8].owners }}"
+    filters:
+      name: "{{ ec2_info[rhel8].filter }}"
+      architecture: "{{ ec2_info[rhel8].architecture }}"
+  register: amis
+
+- name: save ami for rhel8 nodes
+  set_fact:
+    node_ami_rhel_8: >
+      {{ amis.images | selectattr('name', 'defined') | sort(attribute='name') | last }}

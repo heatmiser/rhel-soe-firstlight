@@ -1,0 +1,15 @@
+{% if create_cluster %}
+{% for vm in isonode_node_facts.instances %}
+{% if student_user + item == vm.tags.Student %}
+{{ vm.private_ip_address }} {{vm.tags.short_name}}.example.com {{ vm.tags.short_name }}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if create_cluster %}
+{% for vm in remotenode_node_facts.instances %}
+{% if student_user + item == vm.tags.Student %}
+{{ vm.private_ip_address }} {{vm.tags.short_name}}.example.com {{ vm.tags.short_name }}
+{% endif %}
+{% endfor %}
+{% endif %}

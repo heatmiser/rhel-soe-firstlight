@@ -1,0 +1,16 @@
+---
+## all your base are belong to us
+- name: rhel scenario
+  include_tasks: ami_find_rhel.yml
+
+- name: network scenario
+  include_tasks: ami_find_network.yml
+
+- name: f5 scenario
+  include_tasks: ami_find_f5.yml
+
+- name: windows scenario
+  include_tasks: ami_find_windows.yml
+
+- name: security scenario
+  include_tasks: ami_find_security.yml

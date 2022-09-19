@@ -1,0 +1,15 @@
+---
+- name: ensure scenario folder {{ ec2_name_prefix }} exists
+  file:
+    path: "{{ playbook_dir }}/{{ ec2_name_prefix }}"
+    state: directory
+
+## These AWS resources are used for every scenario type
+## This includes VPC, subnet, Security Group, Internet Gateway and route table
+- name: provision aws resources
+  include_tasks: resources/resources.yml
+
+## This duplicates the above when network scenario uses 2 VPCs
+- name: provision networking aws resources
+  include_tasks: resources/resources_{{scenario_type}}.yml
+  when: scenario_type == 'network' or scenario_type == 'demo'

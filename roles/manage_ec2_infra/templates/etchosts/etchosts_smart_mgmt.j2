@@ -1,0 +1,12 @@
+{% include 'etchosts_localhost.j2' %}
+{% include 'etchosts_rhel_7.j2' %}
+{% include 'etchosts_rhel_8.j2' %}
+{% include 'etchosts_rhel_9.j2' %}
+
+{% for vm in satellite_node_facts.instances %}
+{% if student_user + item == vm.tags.Student %}
+{{ vm.private_ip_address }} {{vm.tags.short_name}}.example.com {{vm.tags.short_name}}
+{% endif %}
+{% endfor %}
+{% include 'etchosts_clusternodes.j2' %}
+{% include 'etchosts_all_vms.j2' %}

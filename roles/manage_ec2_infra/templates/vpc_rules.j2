@@ -1,0 +1,12 @@
+{
+  "all_rules":
+  {% if scenario_type == 'demo' %}
+  {{ (scenarios.common.ports + scenarios.f5.ports + scenarios.network.ports) | to_nice_json }}
+  {% else %}
+  {% if scenarios[scenario_type].ports is defined %}
+  {{ (scenarios.common.ports + scenarios[scenario_type].ports) | to_nice_json }}
+  {% else %}
+  {{ scenarios.common.ports | to_nice_json }}
+  {% endif %}
+  {% endif %}
+}

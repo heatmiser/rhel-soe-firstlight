@@ -1,0 +1,18 @@
+
+{% for vm in node4_node_facts.instances %}
+{% if student_user + item == vm.tags.Student %}
+{{ vm.private_ip_address }} {{ vm.tags.short_name }}.example.com {{ vm.tags.short_name }}
+{% endif %}
+{% endfor %}
+
+{% for vm in node5_node_facts.instances %}
+{% if student_user + item == vm.tags.Student %}
+{{ vm.private_ip_address }} {{vm.tags.short_name}}.example.com {{ vm.tags.short_name }}
+{% endif %}
+{% endfor %}
+
+{% for vm in node6_node_facts.instances %}
+{% if student_user + item == vm.tags.Student %}
+{{ vm.private_ip_address }} {{vm.tags.short_name}}.example.com {{ vm.tags.short_name }}
+{% endif %}
+{% endfor %}
