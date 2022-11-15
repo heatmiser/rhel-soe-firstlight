@@ -2,6 +2,24 @@
 
 The Red Hat Enterprise Linux Standard Operating Environment (SOE) automation project is intended for effectively demonstrating the utilization of Red Hat Ansible Automation Platform (AAP) and Red Hat Satellite for the implementation of a Red Hat Enterprise Linux Standard Operating Environment (SOE).
 
+## Access to AAP and Satellite golden images
+
+The Red Hat Enterprise Linux SOE automation project utilizes golden images of a Red Hat Ansible Automation Platform system and a Red Hat Satellite system. Images shared from other AWS accounts can be utilized or golden images can be built.
+
+**golden images shared from other accounts**
+
+If using golden images shared from other accounts, record a) AWS account number that owns the EC2 AMI image shared and b) the EC2 AMI name of the shared image. Have this information ready for use later in the deploy instructions.
+
+**golden images shared from other accounts**
+
+The following GitHub repositories contain build automation for creating EC2 AMI images that will be located within the AWS account.
+
+*Red Hat Ansible Automation Platform EC2 AMI build automation:*<br>
+*- https://github.com/heatmiser/packer-ansible-ec2/tree/aap-2.2*<br>
+
+*Red Hat Satellite EC2 AMI build automation:*<br>
+*- https://github.com/heatmiser/packer-ansible-ec2/tree/satellite-6.11*<br>
+
 ## Use Ansible to Provision RHEL SOE on AWS
 
 *The below instructions are steps that originated from:*<br>
@@ -105,14 +123,14 @@ $ source ~/$PYVENV_PROJDIR/bin/activate
  clone provisioner
 
 ```
-(soe01) $ mkdir -p ~/github/ansible
-(soe01) $ cd ~/github/ansible
-(soe01) $ git clone https://github.com/ansible/workshops.git
-(soe01) $ vim ~/$PYVENV_PROJDIR/deploy_vars/smart_mgmt_wkshop_vars.yml
+(soe01) $ mkdir -p ~/github/project
+(soe01) $ cd ~/github/project
+(soe01) $ git clone https://github.com/heatmiser/rhel-soe-firstlight.git
+(soe01) $ vim ~/$PYVENV_PROJDIR/deploy_vars/soe01_vars.yml
 ```
 Please modify the following variables below to match your unique configuration.
 - ec2_region: (a single ec2 region, ex. us-east-1; us-east-2)
-- ec2_name_prefix: (a single unique name for your workshop, ex. soe01; smrtmgmtvendor)
+- ec2_name_prefix: (a single unique name for your workshop, ex. soe01)
 - provision_mode: `workshop` or `playground` (`workshop` completes Satellite IAC roll out; products, repos, CV, LE, Act Keys, manifest publishing, etc. takes longer to deploy, however, saves major time for workshop attendees because it's already completed prior to beginning exercises)
 - offline_token: token to authenticate calls to Red Hat's APIs, generate token at https://access.redhat.com/management/api
 - redhat_username / redhat_password: Red Hat account name and password, used for authorized access to registry.redhat.io
@@ -124,7 +142,7 @@ All remaining variables LEAVE AS IS!!!
 ```
 ---
 # region where the nodes will live
-ec2_region: us-east-2
+ec2_region: us-east-1
 
 # name prefix for all the VMs
 ec2_name_prefix: soe01
@@ -157,7 +175,7 @@ dns_type: aws
 workshop_dns_zone: subdom.redhatpartnertech.net
 
 # password for Ansible control node
-admin_password: Ansible=2021!!!
+admin_password: St4nd4rdiz3!!!
 
 # install control node
 controllerinstall: true
@@ -207,7 +225,7 @@ tower_node_aws_api_access: true
 
 **Manifest**
 - Login to https://access.redhat.com --> Subscriptions --> Subscription Allocations, then [New Subscription Allocation]
-- Name it, then select type: Satellite 6.8, then click [Create]
+- Name it, then select type: Satellite 6.11, then click [Create]
 - Once created, select the Subscriptions tab, then click [Add Subscriptions] to add # of Red Hat Ansible Automation subs
 - Click [Export Manifest] to download .zip file
 - Move zip file to "workshops/provisioner" folder and rename<br>
@@ -224,7 +242,7 @@ or
 
 **Build Ansible workshops provisioner collection**
 ```
-(soe01) $ cd ~/github/ansible/workshops
+(soe01) $ cd ~/github/project/rhel-soe-firstlight
 (soe01) $ git checkout main
 (soe01) $ export ANSIBLE_CONFIG=provisioner/ansible.cfg
 (soe01) $ ansible-galaxy install --force -r collections/requirements.yml
@@ -239,12 +257,12 @@ or
 ```
 > **NOTE**: Utilizing `unbuffer` utility to handle `ansible-playbook` is not required, however, provides a convenient method to monitor console while simultaneously writing to log file
 ```
-(soe01) $ unbuffer ansible-playbook ./provisioner/provision_lab.yml -e @~/$PYVENV_PROJDIR/deploy_vars/smart_mgmt_wkshop_vars.yml | tee ~/$PYVENV_PROJDIR/deploy_logs/mgmtlab-deploy-$(date +%Y-%m-%d.%H%M).log
+(soe01) $ unbuffer ansible-playbook ./provisioner/provision_soe.yml -e @~/$PYVENV_PROJDIR/deploy_vars/soe01_vars.yml | tee ~/$PYVENV_PROJDIR/deploy_logs/soe-deploy-$(date +%Y-%m-%d.%H%M).log
 ```
 
 If `unbuffer` is utilized to handle the ansible-playbook command, the log output can be cleaned up post deployment with the following command:
 ```
-sed -i "s,\x1B\[[0-9;]*[a-zA-Z],,g" ~/$PYVENV_PROJDIR/deploy_logs/mgmtlab-deploy-<date_timestamp>.log
+sed -i "s,\x1B\[[0-9;]*[a-zA-Z],,g" ~/$PYVENV_PROJDIR/deploy_vars/soe01-deploy-<date_timestamp>.log
 ```
 
 Unfamiliar with Python virtual environments (venv)?  Remember, the Python venv was "activated" earlier in the process via this command:
@@ -261,11 +279,11 @@ $
 ```
 $ export PYVENV_PROJDIR="soe01"
 $ source ~/$PYVENV_PROJDIR/bin/activate
-(soe01) $ cd ~/github/ansible/workshops
+(soe01) $ ~/github/project/rhel-soe-firstlight
 (soe01) $ export ANSIBLE_CONFIG=provisioner/ansible.cfg
 (soe01) $ export AWS_MAX_ATTEMPTS=10
 (soe01) $ export AWS_RETRY_MODE=standard
-(soe01) $ unbuffer ansible-playbook teardown_lab.yml -e @~/$PYVENV_PROJDIR/deploy_vars/smart_mgmt_wkshop_vars.yml -e debug_teardown=true | tee ~/$PYVENV_PROJDIR/deploy_logs/mgmtlab-teardown-$(date +%Y-%m-%d.%H%M).log
+(soe01) $ unbuffer ansible-playbook teardown_soe.yml -e @~/$PYVENV_PROJDIR/deploy_vars/soe01_vars.yml -e debug_teardown=true | tee ~/$PYVENV_PROJDIR/deploy_logs/soe01-teardown-$(date +%Y-%m-%d.%H%M).log
 (soe01) $ deactivate
 $
 ```
@@ -273,7 +291,7 @@ $
 ## Self Paced Exercises
 
 - [Ansible Automation Platform Self-Paced Labs
-](https://www.redhat.com/en/engage/redhat-ansible-automation-202108061218) - These interactive learning scenarios provide you with a pre-configured Ansible Automation Platform environment to experiment, learn, and see how the platform can help you solve real-world problems. The environment runs entirely in your browser, enabling you to learn more about our technology at your pace and time.
+](https://www.redhat.com/en/engage/redhat-ansible-automation-202108061218) - These interactive learning scenarios provide you with a pre-configured Ansible Automation Platform environment to experiment, learn, and see how the platform can help you solve real-world problems. The environment runs entirely in your browser, enabling you to learn more about Red Hat automation technology at your pace when convenient.
 
 ## Product Demos
 
@@ -287,10 +305,6 @@ $
 - [Ansible Getting Started Guide](https://docs.ansible.com/ansible/latest/user_guide/index.html#get)
 - [Ansible Network Automation - Getting Started](https://docs.ansible.com/ansible/latest/network/getting_started/index.html)
 - [Red Hat Training and Certification for Red Hat Ansible Automation Platform](https://red.ht/aap_training)
-
-## Slack Community
-
-- [Join us on Ansible Network Slack](https://join.slack.com/t/ansiblenetwork/shared_invite/zt-3zeqmhhx-zuID9uJqbbpZ2KdVeTwvzw)
 
 ## E-Books
 
